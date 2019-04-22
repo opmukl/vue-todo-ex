@@ -1,0 +1,5 @@
+var localStorageApi = {
+  init(){
+    alert();
+  }
+};
