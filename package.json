@@ -19,7 +19,7 @@
     "vuetify": "^1.5.5",
     "vuex": "^3.1.0"
   },
-  "devDependencies": { // 내 프로젝트에 종속 된 파일들
+  "devDependencies": { 
     "@vue/cli-plugin-babel": "^3.4.0",
     "@vue/cli-plugin-eslint": "^3.4.0",
     "@vue/cli-service": "^3.4.0",

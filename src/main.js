@@ -13,25 +13,27 @@ const TodoDone = () => import('./components/TodoDone.vue')
 
 const router = new VueRouter({
   mode: 'history',
-  routes : [
-    { path: '/', component: Todo,
-      children: [
-        {
-          path: 'posts',
-          component: UserPost
-        },
-        {
-          path: 'profile',
-          component: UserProfile
-        }
-      ]
+  routes: [
+    {
+      path: '/',
+      component: Todo,
+      // children: [
+      //   {
+      //     path: 'posts',
+      //     component: UserPost
+      //   },
+      //   {
+      //     path: 'profile',
+      //     component: UserProfile
+      //   }
+      // ]
     },
-    { path: '/todoDone', component: TodoDone }
-  ]
+    { path: '/todoDone', component: TodoDone },
+  ],
 })
 
 new Vue({
   store,
   router,
-  render: h => h(App)
+  render: h => h(App),
 }).$mount('#app')
