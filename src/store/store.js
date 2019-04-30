@@ -12,9 +12,23 @@ export default new Vuex.Store({
 
   actions: {
     // todos 초기화
-    loadTodos({ commit }) {
+    loadTodos({ commit, state }) {
       //loadTodos를 호출할때 api 목록을 가져오는 걸 호출 -> commit
-      commit('initTodos', api.todos);
+      // commit('initTodos', api.todos);
+      $.ajax({
+        url: 'http://localhost:3001/api/todos',
+        type: 'GET',
+        success: function(data) {
+          state.todos = data;
+          //alert(JSON.stringify(data));
+        },
+        error: function(error) {
+          console.log(error);
+        }
+        // data: todos
+        // data: { name: '홍길동' },
+        // dataType: 'json' // 서버에서 보내줄 데이터의 타입
+      });
     },
 
     // todos 업데이트

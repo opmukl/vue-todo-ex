@@ -1,19 +1,19 @@
 {
-  "posts": [
+  "todos": [
+    {
+      "id": 0,
+      "text": "빨래하기",
+      "done": true
+    },
     {
       "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
+      "text": "청소하기",
+      "done": false
+    },
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "id": 2,
+      "text": "설거지하기",
+      "done": true
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }
