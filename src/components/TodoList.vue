@@ -46,7 +46,8 @@ export default {
         return this.$store.state.todos
       },
       set(todos) {
-        this.$store.dispatch('updateTodos', todos)
+        console.log(todos)
+        // this.$store.dispatch('updateTodos', todos)
       }
     }
   },

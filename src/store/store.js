@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-// import TodoData from '@/api/todoData'
-import api from '@/api/api';
+import $ from 'jquery'
 
 Vue.use(Vuex);
 
@@ -12,62 +11,84 @@ export default new Vuex.Store({
 
   actions: {
     // todos 초기화
-    loadTodos({ commit, state }) {
+    loadTodos({ commit }) {
       //loadTodos를 호출할때 api 목록을 가져오는 걸 호출 -> commit
-      // commit('initTodos', api.todos);
       $.ajax({
         url: 'http://localhost:3001/api/todos',
         type: 'GET',
         success: function(data) {
-          state.todos = data;
-          //alert(JSON.stringify(data));
+          commit('initTodos', data);
         },
         error: function(error) {
           console.log(error);
         }
-        // data: todos
-        // data: { name: '홍길동' },
-        // dataType: 'json' // 서버에서 보내줄 데이터의 타입
       });
     },
 
     // todos 업데이트
     updateTodos({ commit }, todos) {
-      api.updateTodos(todos);
-      commit('initTodos', api.todos);
+      // api.updateTodos(todos);
+      // commit('initTodos', api.todos);
     },
 
     // todo list 추가
-    addTodo({ commit }, newTodo) {
-      api.addTodo(newTodo);
-      // commit('addTodo', newTodo)
-      commit('initTodos', api.todos);
+    addTodo({ dispatch }, newTodo) {
+      $.ajax({
+        url: 'http://localhost:3001/api/todos',
+        type: 'POST',
+        contentType: 'application/json;charset=utf8', //내가 보내는 data 값의 contentType설정
+        data: JSON.stringify({
+          text: newTodo,
+          done: false
+        }),
+        success: function(data) {
+          console.log(data);
+          dispatch('loadTodos')
+        },
+        error: function(error) {
+          console.log(error);
+        }
+      });
     },
 
     // todo 제거
-    deleteTodo({ commit }, todoId) {
+    deleteTodo({ dispatch }, id) {
       if (!confirm('정말 삭제하시겠습니까??')) return;
-      api.deleteTodo(todoId);
-      commit('deleteTodo', todoId);
+      $.ajax({
+        url: `http://localhost:3001/api/todos/${id}`,
+        type: 'DELETE',
+        success: function() {
+          dispatch('loadTodos')
+        },
+        error: function(error) {
+          console.log(error);
+        }
+      });
     },
 
     // 완료된 todos 제거
     deleteDoneTodos({ commit }) {
-      api.deleteDoneTodos();
-      commit('initTodos', api.todos);
+      // api.deleteDoneTodos();
+      // commit('initTodos', api.todos);
+      // json server에서 기능을 제공하는게 없는듯...
     },
 
-    // todo text 변경
-    updateTodoText({ commit }, [todoId, editedText]) {
-      api.updateTodoText(todoId, editedText);
-      // (??) api에서 todo update되고 나서 mutation을 통해서 state변화가 필요한가?
-      commit('updateTodoText', [todoId, editedText]);
-    },
-
-    // todo 완료상태
-    updateDoneState({ commit }, todoId) {
-      api.updateDoneState(todoId);
-      commit('updateDoneState', todoId);
+    // todo 상태변경
+    updateTodo({ dispatch }, todo) {
+      // put: 전체를 업데이트
+      // patch: 일부만 업데이트
+      $.ajax({
+        url: `http://localhost:3001/api/todos/${todo.id}`,
+        type: 'PATCH',
+        contentType: 'application/json;charset=utf8',
+        data: JSON.stringify(todo),
+        success: function() {
+          dispatch('loadTodos')
+        },
+        error: function(error) {
+          console.log(error);
+        }
+      });
     }
   },
 

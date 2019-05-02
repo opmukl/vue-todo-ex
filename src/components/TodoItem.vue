@@ -6,7 +6,10 @@
         type="checkbox"
         class="chk__todo-state"
         :checked="todo.done"
-        @change="updateDoneState(todo.id)"
+        @change="updateTodo({
+          id: todo.id,
+          done: !todo.done
+        })"
       >
       <span :class="{'on':todo.done}" v-show="!this.editing">{{todo.text}}</span>
       <input
@@ -17,7 +20,12 @@
         v-show="this.editing"
         ref="editTodo"
         @keyup.enter="$refs.editTodo.blur()"
-        @blur="updateTodoText()"
+        @blur="
+          editing = false;
+          updateTodo({
+            id: todo.id,
+            text: editedText
+          })"
       >
     </label>
     <div>
@@ -51,12 +59,15 @@ export default {
       this.$nextTick(() => this.$refs.editTodo.focus())
     },
 
-    updateTodoText() {
-      this.editing = false
-      this.$store.dispatch('updateTodoText', [this.todo.id, this.editedText])
-    },
+    // updateTodo() {
+    //   this.editing = false
+    //   this.updateTodo({
+    //     id: this.todo.id,
+    //     text: this.editedText
+    //   })
+    // },
 
-    ...mapActions(['updateDoneState', 'deleteTodo'])
+    ...mapActions(['updateTodo', 'deleteTodo'])
   }
 }
 </script>
