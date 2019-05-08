@@ -9,6 +9,7 @@
     "json-server": "json-server --watch json-server/db.json --routes json-server/routes.json --port 3001"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "jquery": "^3.4.1",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
