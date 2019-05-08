@@ -10,6 +10,7 @@
     <draggable
       @end="drag = false"
       @start="drag = true"
+      :sortable="true"
       class="todo-list"
       group="todos"
       v-if="this.$store.state.todos.length > 0"
@@ -47,11 +48,14 @@ export default {
       },
       set(todos) {
         console.log(todos)
-        // this.$store.dispatch('updateTodos', todos)
+        this.$store.dispatch('updateTodoList', todos)
       }
     }
   },
   methods: {
+    changeDrag() {
+      console.log(this.todos)
+    },
     ...mapActions(['deleteDoneTodos'])
   }
 }

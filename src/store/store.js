@@ -18,10 +18,21 @@ export default new Vuex.Store({
     },
 
     // todos 업데이트
-    // updateTodos({ commit }, todos) {
-    //   api.updateTodos(todos);
-    //   commit('initTodos', api.todos);
-    // },
+    updateTodoList({ commit }, todos) {
+      Promise.all(todos.map(todo => api.deleteTodo(todo.id))).then(() => {
+        Promise.all(
+          todos.map(todo => api.addTodo({ text: todo.text, done: todo.done }))
+        ).then(values => {
+          commit('updateTodoList', values.map(value => value.data));
+        });
+      });
+
+      // console.log(todos);
+      // api.updateTodoList(todos).then(res => {
+      //   console.log(res.data);
+      // });
+      // commit('initTodos', api.todos);
+    },
 
     // todo list 추가
     addTodo(context, newTodo) {
@@ -31,7 +42,6 @@ export default new Vuex.Store({
           done: false
         })
         .then(res => {
-          console.log(res.data);
           context.commit('addTodo', res.data);
         });
     },
@@ -61,7 +71,6 @@ export default new Vuex.Store({
 
     // todo 상태 변경
     updateTodo(context, todo) {
-      console.log(todo);
       api.updateTodo(todo).then(res => {
         context.commit('updateTodo', res.data);
       });
@@ -108,8 +117,11 @@ export default new Vuex.Store({
 
     updateTodo(state, todo) {
       const selectedIdx = state.todos.findIndex(t => t.id === todo.id);
-      console.log(state.todos[selectedIdx]);
+      // console.log(state.todos[selectedIdx]);
       Vue.set(state.todos, selectedIdx, todo);
+    },
+    updateTodoList(state, todos) {
+      state.todos = todos;
     }
 
     // addTodo(state, newTodo) {

@@ -1,39 +1,29 @@
 {
   "todos": [
     {
-      "id": 0,
-      "text": "빨래하기df",
-      "done": false
-    },
-    {
-      "id": 1,
-      "text": "청소하기",
-      "done": false
-    },
-    {
-      "text": "3df",
-      "id": 2,
-      "done": true
-    },
-    {
-      "text": "4",
-      "id": 3,
-      "done": false
-    },
-    {
-      "text": "5",
-      "id": 4,
-      "done": false
-    },
-    {
-      "text": "6",
-      "id": 5,
-      "done": false
-    },
-    {
-      "text": "7",
+      "text": "C",
       "done": false,
-      "id": 6
+      "id": 1
+    },
+    {
+      "text": "다해따",
+      "done": false,
+      "id": 2
+    },
+    {
+      "text": "B",
+      "done": false,
+      "id": 3
+    },
+    {
+      "text": "A",
+      "done": false,
+      "id": 4
+    },
+    {
+      "text": "B",
+      "done": false,
+      "id": 5
     }
   ]
 }

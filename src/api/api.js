@@ -18,6 +18,10 @@ class TodosApi {
   updateTodo(todo) {
     return axios.patch(`/api/todos/${todo.id}`, todo);
   }
+
+  updateTodoList(todos) {
+    return axios.put(`/api/todos/${todo.id}`, todos);
+  }
 }
 
 export default new TodosApi();
