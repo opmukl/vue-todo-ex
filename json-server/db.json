@@ -2,7 +2,7 @@
   "todos": [
     {
       "id": 0,
-      "text": "빨래하기",
+      "text": "빨래하기df",
       "done": false
     },
     {
@@ -23,12 +23,12 @@
     {
       "text": "5",
       "id": 4,
-      "done": true
+      "done": false
     },
     {
       "text": "6",
       "id": 5,
-      "done": true
+      "done": false
     },
     {
       "text": "7",

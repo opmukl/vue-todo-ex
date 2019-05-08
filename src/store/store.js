@@ -61,13 +61,8 @@ export default new Vuex.Store({
 
     // todo 상태 변경
     updateTodo(context, todo) {
-      console.log('//========= action updateTodo');
-
       console.log(todo);
-
       api.updateTodo(todo).then(res => {
-        console.log('//========= action updateTodo api');
-        console.log(res.data);
         context.commit('updateTodo', res.data);
       });
     }
@@ -112,11 +107,9 @@ export default new Vuex.Store({
     },
 
     updateTodo(state, todo) {
-      console.log(`///////////mutations updateTodo`);
-      console.log(todo);
-
-      // const findedTodo = state.todos.find(todo => todo.id === todoId);
-      // console.log(findedTodo);
+      const selectedIdx = state.todos.findIndex(t => t.id === todo.id);
+      console.log(state.todos[selectedIdx]);
+      Vue.set(state.todos, selectedIdx, todo);
     }
 
     // addTodo(state, newTodo) {

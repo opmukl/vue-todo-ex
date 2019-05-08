@@ -6,12 +6,16 @@
         type="checkbox"
         class="chk__todo-state"
         :checked="todo.done"
-        @change="updateTodo({
-          id: todo.id,
-          done: !todo.done
-        })"
-      >
-      <span :class="{'on':todo.done}" v-show="!this.editing">{{todo.text}}</span>
+        @change="
+          updateTodo({
+            id: todo.id,
+            done: !todo.done
+          })
+        "
+      />
+      <span :class="{ on: todo.done }" v-show="!this.editing">{{
+        todo.text
+      }}</span>
       <input
         class="input__edit-todo"
         autofocus
@@ -21,12 +25,13 @@
         ref="editTodo"
         @keyup.enter="$refs.editTodo.blur()"
         @blur="
-          editing = false;
+          editing = false
           updateTodo({
             id: todo.id,
             text: editedText
-          })"
-      >
+          })
+        "
+      />
     </label>
     <div>
       <button type="button" @click="editTodo()" v-show="!todo.done">
