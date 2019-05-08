@@ -8,42 +8,32 @@
     {
       "id": 1,
       "text": "청소하기",
-      "done": true
-    },
-    {
-      "id": 2,
-      "text": "설거지하기",
       "done": false
     },
     {
-      "text": "오ㅗ오오ㅗ",
-      "done": false,
-      "id": 5
+      "text": "3df",
+      "id": 2,
+      "done": true
     },
     {
-      "text": "투두 하기ㅗ호",
+      "text": "4",
+      "id": 3,
+      "done": false
+    },
+    {
+      "text": "5",
+      "id": 4,
+      "done": true
+    },
+    {
+      "text": "6",
+      "id": 5,
+      "done": true
+    },
+    {
+      "text": "7",
       "done": false,
       "id": 6
-    },
-    {
-      "text": "음...ㅇㅇ",
-      "done": false,
-      "id": 7
-    },
-    {
-      "text": "dfvfdvfd",
-      "done": false,
-      "id": 10
-    },
-    {
-      "text": "헤헤",
-      "done": false,
-      "id": 11
-    },
-    {
-      "text": "ㅋㅋㅋㅋ",
-      "done": false,
-      "id": 12
     }
   ]
 }

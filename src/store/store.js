@@ -16,15 +16,42 @@ export default new Vuex.Store({
         context.commit('initTodos', res.data);
       });
     },
-    // loadTodos({ commit, state }) {
-    //   //loadTodos를 호출할때 api 목록을 가져오는 걸 호출 -> commit
-    //   // commit('initTodos', api.todos);
+
+    // todos 업데이트
+    // updateTodos({ commit }, todos) {
+    //   api.updateTodos(todos);
+    //   commit('initTodos', api.todos);
+    // },
+
+    // todo list 추가
+    addTodo(context, newTodo) {
+      api
+        .addTodo({
+          text: newTodo,
+          done: false
+        })
+        .then(res => {
+          console.log(res.data);
+          context.commit('addTodo', res.data);
+        });
+    },
+
+    // todo 제거
+    deleteTodo(context, id) {
+      if (!confirm('정말 삭제하시겠습니까??')) return;
+      api.deleteTodo(id).then(res => {
+        context.commit('deleteTodo', id);
+      });
+    },
+
+    // 완료된 todos 제거
+    // deleteTodo({ dispatch }, id) {
+    //   if (!confirm('정말 삭제하시겠습니까??')) return;
     //   $.ajax({
-    //     url: '/api/todos',
-    //     type: 'GET',
-    //     success: function(data) {
-    //       // (??) 여기서 todos를 업데이트 시켜줘도 되나용
-    //       state.todos = data;
+    //     url: `http://localhost:3001/api/todos/${id}`,
+    //     type: 'DELETE',
+    //     success: function() {
+    //       dispatch('loadTodos');
     //     },
     //     error: function(error) {
     //       console.log(error);
@@ -32,57 +59,35 @@ export default new Vuex.Store({
     //   });
     // },
 
-    // todos 업데이트
-    updateTodos({ commit }, todos) {
-      api.updateTodos(todos);
-      commit('initTodos', api.todos);
-    },
+    // todo 상태 변경
+    updateTodo(context, todo) {
+      console.log('//========= action updateTodo');
 
-    // todo list 추가
-    addTodo({ commit }, newTodo) {
-      // api.addTodo(newTodo);
+      console.log(todo);
 
-      $.ajax({
-        url: '/api/todos',
-        type: 'GET',
-        success: function(data) {
-          // (??) 여기서 todos를 업데이트 시켜줘도 되나용
-          state.todos = data;
-        },
-        error: function(error) {
-          console.log(error);
-        }
+      api.updateTodo(todo).then(res => {
+        console.log('//========= action updateTodo api');
+        console.log(res.data);
+        context.commit('updateTodo', res.data);
       });
-
-      // commit('addTodo', newTodo)
-      commit('initTodos', api.todos);
-    },
-
-    // todo 제거
-    deleteTodo({ commit }, todoId) {
-      if (!confirm('정말 삭제하시겠습니까??')) return;
-      api.deleteTodo(todoId);
-      commit('deleteTodo', todoId);
-    },
-
-    // 완료된 todos 제거
-    deleteDoneTodos({ commit }) {
-      api.deleteDoneTodos();
-      commit('initTodos', api.todos);
-    },
-
-    // todo text 변경
-    updateTodoText({ commit }, [todoId, editedText]) {
-      api.updateTodoText(todoId, editedText);
-      // (??) api에서 todo update되고 나서 mutation을 통해서 state변화가 필요한가?
-      commit('updateTodoText', [todoId, editedText]);
-    },
-
-    // todo 완료상태
-    updateDoneState({ commit }, todoId) {
-      api.updateDoneState(todoId);
-      commit('updateDoneState', todoId);
     }
+
+    // updateTodo({ dispatch }, todo) {
+    //   // put: 전체를 업데이트
+    //   // patch: 일부만 업데이트
+    //   $.ajax({
+    //     url: `http://localhost:3001/api/todos/${todo.id}`,
+    //     type: 'PATCH',
+    //     contentType: 'application/json;charset=utf8',
+    //     data: JSON.stringify(todo),
+    //     success: function() {
+    //       dispatch('loadTodos');
+    //     },
+    //     error: function(error) {
+    //       console.log(error);
+    //     }
+    //   });
+    // }
   },
 
   getters: {
@@ -95,6 +100,23 @@ export default new Vuex.Store({
   mutations: {
     initTodos(state, todos) {
       state.todos = todos;
+    },
+
+    addTodo(state, newTodo) {
+      state.todos.push(newTodo);
+    },
+
+    deleteTodo(state, id) {
+      const selectedIdx = state.todos.findIndex(todo => todo.id === id);
+      if (selectedIdx > -1) state.todos.splice(selectedIdx, 1);
+    },
+
+    updateTodo(state, todo) {
+      console.log(`///////////mutations updateTodo`);
+      console.log(todo);
+
+      // const findedTodo = state.todos.find(todo => todo.id === todoId);
+      // console.log(findedTodo);
     }
 
     // addTodo(state, newTodo) {

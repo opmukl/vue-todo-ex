@@ -13,8 +13,16 @@ class TodosApi {
     return axios.get('/api/todos');
   }
 
-  addTodos(todo) {
+  addTodo(newTodo) {
     return axios.post('/api/todos', newTodo);
+  }
+
+  deleteTodo(id) {
+    return axios.delete(`/api/todos/${id}`);
+  }
+
+  updateTodo(todo) {
+    return axios.patch(`/api/todos/${todo.id}`, todo);
   }
 
   // // add
