@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import api from '@/api/api';
+import { stat } from 'fs';
 
 Vue.use(Vuex);
 
@@ -11,42 +12,42 @@ export default new Vuex.Store({
 
   actions: {
     // todos 초기화
-    async loadTodos(context) {
-      context.commit('initTodos', (await api.getTodos()).data);
-    },
-
-    // todos 업데이트
-    updateTodoList({ commit }, todos) {
-      Promise.all(todos.map(todo => api.deleteTodo(todo.id))).then(() => {
-        Promise.all(
-          todos.map(todo => api.addTodo({ text: todo.text, done: todo.done }))
-        ).then(values => {
-          commit('updateTodoList', values.map(value => value.data));
-        });
+    loadTodos(context) {
+      api.getTodos().then(res => {
+        context.commit('initTodos', res.data);
       });
     },
+    async loadTodos({ commit }) {
+      commit('initTodos', (await api.getTodos()).data);
+    },
 
-    // todo list 추가
-    addTodo(context, newTodo) {
-      api
-        .addTodo({
+    // todo 추가
+    async addTodo({ commit }, newTodo) {
+      commit(
+        'addTodo',
+        (await api.addTodo({
           text: newTodo,
           done: false
-        })
-        .then(res => {
-          context.commit('addTodo', res.data);
-        });
+        })).data
+      );
     },
 
     // todo 제거
-    deleteTodo(context, id) {
+    async deleteTodo({ commit }, id) {
       if (!confirm('정말 삭제하시겠습니까??')) return;
-      api.deleteTodo(id).then(res => {
-        context.commit('deleteTodo', id);
-      });
+      await api.deleteTodo(id);
+      commit('deleteTodo', id);
     },
 
     // 완료된 todos 제거
+    async deleteDoneTodos({ state, commit }, id) {
+      //index 나 id 값으로 done값이 true인 것들 체크해서 배열에 담기
+      // .map 돌려서 deleteTodo
+      console.log(state);
+      // state.totos.map(todo => {
+      //   console.log(todo);
+      // });
+    },
     // deleteTodo({ dispatch }, id) {
     //   if (!confirm('정말 삭제하시겠습니까??')) return;
     //   $.ajax({
@@ -62,10 +63,17 @@ export default new Vuex.Store({
     // },
 
     // todo 업데이트
-    updateTodo(context, todo) {
-      api.updateTodo(todo).then(res => {
-        context.commit('updateTodo', res.data);
-      });
+    async updateTodo({ commit }, todo) {
+      commit('updateTodo', (await api.updateTodo(todo)).data);
+    },
+
+    // todo list 업데이트
+    async updateTodoList({ commit }, todos) {
+      await Promise.all(todos.map(todo => api.deleteTodo(todo.id)));
+      const values = await Promise.all(
+        todos.map(todo => api.addTodo({ text: todo.text, done: todo.done }))
+      );
+      commit('updateTodoList', values.map(value => value.data));
     }
   },
 
@@ -94,6 +102,7 @@ export default new Vuex.Store({
       const selectedIdx = state.todos.findIndex(t => t.id === todo.id);
       Vue.set(state.todos, selectedIdx, todo);
     },
+
     updateTodoList(state, todos) {
       state.todos = todos;
     }

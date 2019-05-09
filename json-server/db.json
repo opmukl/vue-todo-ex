@@ -1,29 +1,39 @@
 {
   "todos": [
     {
-      "text": "다해따",
+      "text": "A",
       "done": true,
       "id": 1
     },
     {
-      "text": "B",
+      "text": "D",
       "done": true,
       "id": 2
     },
     {
-      "text": "C",
+      "text": "E",
       "done": true,
       "id": 3
     },
     {
-      "text": "A",
+      "text": "F",
       "done": false,
       "id": 4
     },
     {
-      "text": "B",
+      "text": "CDD",
       "done": false,
       "id": 5
+    },
+    {
+      "text": "G",
+      "done": false,
+      "id": 6
+    },
+    {
+      "text": "B",
+      "done": false,
+      "id": 7
     }
   ]
 }
