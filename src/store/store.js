@@ -11,10 +11,8 @@ export default new Vuex.Store({
 
   actions: {
     // todos 초기화
-    loadTodos(context) {
-      api.getTodos().then(res => {
-        context.commit('initTodos', res.data);
-      });
+    async loadTodos(context) {
+      context.commit('initTodos', (await api.getTodos()).data);
     },
 
     // todos 업데이트
@@ -26,12 +24,6 @@ export default new Vuex.Store({
           commit('updateTodoList', values.map(value => value.data));
         });
       });
-
-      // console.log(todos);
-      // api.updateTodoList(todos).then(res => {
-      //   console.log(res.data);
-      // });
-      // commit('initTodos', api.todos);
     },
 
     // todo list 추가
@@ -69,29 +61,12 @@ export default new Vuex.Store({
     //   });
     // },
 
-    // todo 상태 변경
+    // todo 업데이트
     updateTodo(context, todo) {
       api.updateTodo(todo).then(res => {
         context.commit('updateTodo', res.data);
       });
     }
-
-    // updateTodo({ dispatch }, todo) {
-    //   // put: 전체를 업데이트
-    //   // patch: 일부만 업데이트
-    //   $.ajax({
-    //     url: `http://localhost:3001/api/todos/${todo.id}`,
-    //     type: 'PATCH',
-    //     contentType: 'application/json;charset=utf8',
-    //     data: JSON.stringify(todo),
-    //     success: function() {
-    //       dispatch('loadTodos');
-    //     },
-    //     error: function(error) {
-    //       console.log(error);
-    //     }
-    //   });
-    // }
   },
 
   getters: {
@@ -117,42 +92,10 @@ export default new Vuex.Store({
 
     updateTodo(state, todo) {
       const selectedIdx = state.todos.findIndex(t => t.id === todo.id);
-      // console.log(state.todos[selectedIdx]);
       Vue.set(state.todos, selectedIdx, todo);
     },
     updateTodoList(state, todos) {
       state.todos = todos;
     }
-
-    // addTodo(state, newTodo) {
-    //   const maxList =
-    //     state.todos.length > 0
-    //       ? Math.max(...state.todos.map(todo => todo.id))
-    //       : 0
-    //   state.todos.push({
-    //     text: newTodo,
-    //     id: maxList + 1,
-    //     done: false
-    //   })
-    // },
-
-    // deleteTodo(state, todoId) {
-    //   const selectedIdx = state.todos.findIndex(todo => todo.id === todoId)
-    //   if (selectedIdx > -1) state.todos.splice(selectedIdx, 1)
-    // },
-
-    // deleteDoneTodos(state) {
-    //   state.todos = state.todos.filter(todo => !todo.done)
-    // },
-
-    // updateTodoText(state, [todoId, editedText]) {
-    //   const todo = state.todos.find(todo => todo.id === todoId)
-    //   todo.text = editedText
-    // },
-
-    // updateDoneState(state, todoId) {
-    //   const todo = state.todos.find(todo => todo.id === todoId)
-    //   todo.done = !todo.done
-    // }
   }
 });

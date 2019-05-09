@@ -1,18 +1,18 @@
 {
   "todos": [
     {
-      "text": "C",
-      "done": false,
+      "text": "다해따",
+      "done": true,
       "id": 1
     },
     {
-      "text": "다해따",
-      "done": false,
+      "text": "B",
+      "done": true,
       "id": 2
     },
     {
-      "text": "B",
-      "done": false,
+      "text": "C",
+      "done": true,
       "id": 3
     },
     {

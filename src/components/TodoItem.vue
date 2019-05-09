@@ -1,7 +1,6 @@
 <template>
   <div>
     <label>
-      <!-- updateDoneState를 get()/set()을 통해 하는 방법도 있을 것 같다 -->
       <input
         type="checkbox"
         class="chk__todo-state"
@@ -63,15 +62,6 @@ export default {
       this.editedText = this.todo.text
       this.$nextTick(() => this.$refs.editTodo.focus())
     },
-
-    // updateTodo() {
-    //   this.editing = false
-    //   this.updateTodo({
-    //     id: this.todo.id,
-    //     text: this.editedText
-    //   })
-    // },
-
     ...mapActions(['updateTodo', 'deleteTodo'])
   }
 }
