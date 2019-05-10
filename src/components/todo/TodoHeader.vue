@@ -1,11 +1,13 @@
 <template>
   <h1>Todos</h1>
 </template>
+
 <script>
 export default {
-  name: 'todoHeader',
-};
+  name: 'todoHeader'
+}
 </script>
+
 <style lang="scss" scoped>
 h1 {
   font-size: 50px;

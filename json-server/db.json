@@ -11,18 +11,18 @@
       "id": 2
     },
     {
-      "text": "E",
-      "done": true,
-      "id": 3
-    },
-    {
       "text": "F",
       "done": false,
-      "id": 4
+      "id": 3
     },
     {
       "text": "CDD",
       "done": false,
+      "id": 4
+    },
+    {
+      "text": "E",
+      "done": true,
       "id": 5
     },
     {

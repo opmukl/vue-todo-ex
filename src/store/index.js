@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import api from '@/api/api';
-import { stat } from 'fs';
+import api from '@/api/todos';
 
 Vue.use(Vuex);
 
@@ -12,17 +11,13 @@ export default new Vuex.Store({
 
   actions: {
     // todos 초기화
-    loadTodos(context) {
-      api.getTodos().then(res => {
-        context.commit('initTodos', res.data);
-      });
-    },
     async loadTodos({ commit }) {
       commit('initTodos', (await api.getTodos()).data);
     },
 
     // todo 추가
     async addTodo({ commit }, newTodo) {
+      // api에서...!
       commit(
         'addTodo',
         (await api.addTodo({
@@ -43,24 +38,11 @@ export default new Vuex.Store({
     async deleteDoneTodos({ state, commit }, id) {
       //index 나 id 값으로 done값이 true인 것들 체크해서 배열에 담기
       // .map 돌려서 deleteTodo
-      console.log(state);
+      console.log(state.totos);
       // state.totos.map(todo => {
       //   console.log(todo);
       // });
     },
-    // deleteTodo({ dispatch }, id) {
-    //   if (!confirm('정말 삭제하시겠습니까??')) return;
-    //   $.ajax({
-    //     url: `http://localhost:3001/api/todos/${id}`,
-    //     type: 'DELETE',
-    //     success: function() {
-    //       dispatch('loadTodos');
-    //     },
-    //     error: function(error) {
-    //       console.log(error);
-    //     }
-    //   });
-    // },
 
     // todo 업데이트
     async updateTodo({ commit }, todo) {

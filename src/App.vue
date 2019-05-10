@@ -1,27 +1,22 @@
 <template>
   <div id="app">
-    <nav>
-      <button><router-link to="/">Todos</router-link></button>
-      <button><router-link to="/todoDone">Done Todos</router-link></button>
-    </nav>
+    <Nav></Nav>
     <!-- 루트 컴포넌트인 App.vue에 라우터 뷰 추가 -->
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-// import Todo from './components/Todo'
+import Nav from '@/components/shared/Nav.vue'
 
 export default {
   name: 'app',
   components: {
-    // Todo
+    Nav
   },
   data() {
-    return {
-      //
-    }
-  },
+    return {}
+  }
 }
 </script>
 
@@ -50,7 +45,7 @@ button {
 nav {
   position: sticky;
   top: 0;
-  left:0;
+  left: 0;
   text-align: center;
   z-index: 10;
   button {
