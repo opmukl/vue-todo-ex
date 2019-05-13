@@ -1,34 +1,14 @@
 {
   "todos": [
     {
-      "text": "1",
+      "text": "0",
       "done": false,
       "id": 1
     },
     {
-      "text": "333",
-      "done": true,
+      "text": "1",
+      "done": false,
       "id": 2
-    },
-    {
-      "text": "5g",
-      "done": false,
-      "id": 3
-    },
-    {
-      "text": "22",
-      "done": false,
-      "id": 4
-    },
-    {
-      "text": "4",
-      "done": false,
-      "id": 5
-    },
-    {
-      "text": "66",
-      "done": false,
-      "id": 6
     }
   ]
 }

@@ -14,6 +14,7 @@
       :sortable="true"
       class="todo-list"
       group="todos"
+      v-if="this.todos.length > 0"
       v-model="listTodos"
     >
       <transition-group>
@@ -26,6 +27,7 @@
         ></TodoItem>
       </transition-group>
     </draggable>
+    <p class="have-todo" v-else>새로운 할일을 입력해주세요</p>
   </div>
 </template>
 <script>
@@ -37,11 +39,7 @@ const { mapGetters, mapActions } = createNamespacedHelpers('todos')
 
 export default {
   name: 'TodoList',
-  props: {
-    todos: {
-      type: Array
-    }
-  },
+  props: ['todos'],
   components: {
     TodoItem,
     draggable

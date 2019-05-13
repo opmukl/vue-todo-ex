@@ -8,7 +8,6 @@ class TodosApi {
   }
 
   addTodo(newTodo) {
-    //일반적으로 add api 호출해서 시간을 같이 담아서 반환
     return axios.post('/api/todos', newTodo);
   }
 

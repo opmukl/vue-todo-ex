@@ -13,7 +13,6 @@ const actions = {
 
   // todo 추가
   async addTodo({ commit }, newTodo) {
-    // api에서...!
     commit(
       'addTodo',
       (await api.addTodo({
