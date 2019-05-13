@@ -1,8 +1,9 @@
 <template>
   <div>
     <aside>
-      <p class="have-todo" v-if="this.$store.getters.countHaveTodos > 0">
-        해야하는 일 : {{ this.$store.getters.countHaveTodos }} 개
+      <p class="have-todo" v-if="this.countHaveTodos > 0">
+        해야하는 일 :
+        <span v-text="this.countHaveTodos"></span> 개
       </p>
       <p class="have-todo" v-else>-</p>
       <button @click="deleteDoneTodos">완료 된 할일 전체 삭제하기</button>
@@ -13,7 +14,6 @@
       :sortable="true"
       class="todo-list"
       group="todos"
-      v-if="this.$store.state.todos.length > 0"
       v-model="listTodos"
     >
       <transition-group>
@@ -26,37 +26,39 @@
         ></TodoItem>
       </transition-group>
     </draggable>
-    <p class="have-todo" v-else>새로운 할일을 입력해주세요</p>
   </div>
 </template>
 <script>
 import draggable from 'vuedraggable'
 import TodoItem from './TodoItem'
-import { mapActions } from 'vuex'
+
+import { createNamespacedHelpers } from 'vuex'
+const { mapGetters, mapActions } = createNamespacedHelpers('todos')
 
 export default {
   name: 'TodoList',
-  props: ['todos'],
+  props: {
+    todos: {
+      type: Array
+    }
+  },
   components: {
     TodoItem,
     draggable
   },
   computed: {
+    ...mapGetters(['countHaveTodos']),
     listTodos: {
       get() {
-        return this.$store.state.todos
+        return this.$store.state.todos.todos
       },
       set(todos) {
-        console.log(todos)
-        this.$store.dispatch('updateTodoList', todos)
+        this.updateTodoList(todos)
       }
     }
   },
   methods: {
-    changeDrag() {
-      console.log(this.todos)
-    },
-    ...mapActions(['deleteDoneTodos'])
+    ...mapActions(['deleteDoneTodos', 'updateTodoList'])
   }
 }
 </script>

@@ -13,9 +13,6 @@
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapActions } = createNamespacedHelpers('todos')
-
 export default {
   name: 'TodoInput',
   data() {
@@ -24,10 +21,8 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['addTodo']),
-    addTD() {
-      // this.$store.dispatch('todos/addTodo', this.newTodo)
-      this.addTodo(this.newTodo)
+    addTodo() {
+      this.$store.dispatch('todos/addTodo', this.newTodo)
       this.newTodo = ''
     },
     onSubmit() {
@@ -36,7 +31,7 @@ export default {
           alert('내용을 입력해주세요.')
           return
         }
-        this.addTD()
+        this.addTodo()
       })
     }
   }

@@ -12,9 +12,11 @@
           })
         "
       />
-      <span :class="{ on: todo.done }" v-show="!this.editing">{{
-        todo.text
-      }}</span>
+      <span
+        :class="{ on: todo.done }"
+        v-show="!this.editing"
+        v-text="todo.text"
+      ></span>
       <input
         class="input__edit-todo"
         autofocus
@@ -43,7 +45,8 @@
   </div>
 </template>
 <script>
-import { mapActions } from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
+const { mapActions } = createNamespacedHelpers('todos')
 
 export default {
   name: 'TodoItem',

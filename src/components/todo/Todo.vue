@@ -15,7 +15,8 @@ import TodoInput from './TodoInput'
 import TodoList from './TodoList'
 import TodoFooter from './TodoFooter'
 
-import { mapState } from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
+const { mapState, mapActions } = createNamespacedHelpers('todos')
 
 export default {
   name: 'Todo',
@@ -28,11 +29,14 @@ export default {
     TodoList,
     TodoFooter
   },
-  computed: mapState({
-    todos: state => state.todos
-  }),
+  computed: {
+    ...mapState(['todos'])
+  },
   created() {
-    this.$store.dispatch('loadTodos')
+    this.loadTodos()
+  },
+  methods: {
+    ...mapActions(['loadTodos'])
   }
 }
 </script>
