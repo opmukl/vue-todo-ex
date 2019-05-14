@@ -48,7 +48,7 @@ input[type='text'] {
   width: 100%;
   height: 60px;
   padding: 0 20px;
-  font-family: 'Jua', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans KR', sans-serif;
   font-size: 25px;
   border: 0;
   border-bottom: 2px dashed #9e9e9e;

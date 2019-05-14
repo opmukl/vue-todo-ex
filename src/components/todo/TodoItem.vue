@@ -92,7 +92,7 @@ span {
   }
 }
 .input__edit-todo {
-  font-family: 'Jua', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans KR', sans-serif;
   font-size: 20px;
   text-align: left;
   color: #3e3e3e;

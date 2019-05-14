@@ -19,7 +19,7 @@ nav {
   button {
     width: 50%;
     height: 40px;
-    font-family: 'Jua', sans-serif;
+    font-family: 'Hind Siliguri', 'Noto Sans KR', sans-serif;
     font-size: 18px;
     a {
       display: block;

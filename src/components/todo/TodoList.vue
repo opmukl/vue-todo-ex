@@ -74,7 +74,7 @@ aside {
   }
 
   button {
-    font-family: 'Jua', sans-serif;
+    font-family: 'Hind Siliguri', 'Noto Sans KR', sans-serif;
     font-size: 20px;
     background: #4d82cb;
     border-radius: 10px;

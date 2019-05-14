@@ -6,14 +6,12 @@
       <TodoInput></TodoInput>
       <TodoList :todos="todos"></TodoList>
     </section>
-    <TodoFooter></TodoFooter>
   </section>
 </template>
 <script>
 import TodoHeader from './TodoHeader'
 import TodoInput from './TodoInput'
 import TodoList from './TodoList'
-import TodoFooter from './TodoFooter'
 
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapActions } = createNamespacedHelpers('todos')
@@ -26,8 +24,7 @@ export default {
   components: {
     TodoHeader,
     TodoInput,
-    TodoList,
-    TodoFooter
+    TodoList
   },
   computed: {
     ...mapState(['todos'])
@@ -46,7 +43,7 @@ export default {
   display: flex;
   flex-direction: column;
   position: relative;
-  font-family: 'Jua', sans-serif;
+  font-family: 'Hind Siliguri', 'Noto Sans KR', sans-serif;
   color: #000;
   min-height: 100vh;
   background: #fff;

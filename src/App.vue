@@ -3,16 +3,19 @@
     <Navi></Navi>
     <!-- 루트 컴포넌트인 App.vue에 라우터 뷰 추가 -->
     <router-view></router-view>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import Navi from '@/components/shared/Navi.vue'
+import Footer from '@/components/shared/Footer'
 
 export default {
   name: 'app',
   components: {
-    Navi
+    Navi,
+    Footer
   },
   data() {
     return {}
@@ -21,7 +24,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css?family=Jua');
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR|Hind+Siliguri');
 html,
 body {
   background: #e1e2e1;
@@ -53,7 +56,7 @@ button {
 //   button {
 //     width: 50%;
 //     height: 40px;
-//     font-family: 'Jua', sans-serif;
+//     font-family: 'Noto Sans KR', sans-serif;
 //     font-size: 18px;
 //     a {
 //       display: block;
