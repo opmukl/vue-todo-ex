@@ -19,42 +19,31 @@
         :w="memo.w"
         :h="memo.h"
         :i="memo.i"
-        @move.prevent="test()"
+        @move="test()"
       >
         <p v-html="memo.text" @click="openMemo(memo.id, memo.text)"></p>
       </grid-item>
     </grid-layout>
 
-    <div class="pop" :class="{ on: popup.isActive }">
-      <div class="pop-inner">
-        <button type="button" class="btn--close" @click="closeMemo()">
-          <i class="fa fa-times solid"></i>
-        </button>
-        <textarea v-model="popup.text"></textarea>
-      </div>
-    </div>
+    <memoPop :popup="popup"></memoPop>
   </div>
 </template>
 
 <script>
+import memoPop from './MemoPop'
 import VueGridLayout from 'vue-grid-layout'
 
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapActions } = createNamespacedHelpers('memos')
 
 export default {
-  el: '#memo',
   data() {
     return {
-      popup: {
-        id: '',
-        text: '',
-        isActive: false
-      }
       // layout: []
     }
   },
   components: {
+    memoPop,
     GridLayout: VueGridLayout.GridLayout,
     GridItem: VueGridLayout.GridItem
   },
@@ -67,21 +56,11 @@ export default {
     test() {
       console.log('111')
     },
-    openMemo(id, text) {
-      // console.log(text)
-      this.popup.isActive = true
-      this.popup.text = text
-      this.updateMemo(text)
-    },
-    closeMemo() {
-      this.popup.isActive = false
-      this.popup.text = ''
-    },
     layoutUpdatedEvent: function(newLayout) {
       console.log('Updated layout: ', newLayout)
       // this.updateLayout(newLayout)
     },
-    ...mapActions(['updateMemo', 'updateLayout'])
+    ...mapActions(['openMemo', 'updateMemo', 'updateLayout'])
   }
 }
 </script>

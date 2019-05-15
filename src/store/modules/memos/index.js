@@ -2,7 +2,12 @@ import Vue from 'vue';
 import api from '@/api/memos';
 
 const state = {
-  memos: []
+  memos: [],
+  popup: {
+    id: '',
+    text: '',
+    isActive: false
+  }
 };
 
 const actions = {
@@ -28,6 +33,17 @@ const actions = {
 
   async updateLayout(newLayout) {
     console.log(newLayout);
+  },
+
+  openMemo({ commit }, { id, text }) {
+    // console.log(text)
+    this.popup.isActive = true;
+    this.popup.text = text;
+    this.updateMemo(text);
+  },
+  closeMemo() {
+    this.popup.isActive = false;
+    this.popup.text = '';
   }
 };
 const getters = {};
