@@ -1,18 +1,28 @@
 <template>
   <div>
     <form class="ui form">
-      <textarea />
+      <textarea v-model="newText" @blur="addMemo(newText)"></textarea>
     </form>
   </div>
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const { mapState, mapActions } = createNamespacedHelpers('memos')
+
 export default {
   name: 'TodoInput',
   data() {
-    return {}
+    return {
+      newText: ''
+    }
   },
-  methods: {}
+  methods: {
+    test() {
+      console.log(this.newText)
+    },
+    ...mapActions(['addMemo'])
+  }
 }
 </script>
 

@@ -7,9 +7,9 @@ class TodosApi {
     return axios.get('/api/memos');
   }
 
-  // addTodo(newTodo) {
-  //   return axios.post('/api/todos', newTodo);
-  // }
+  addMemo(newText) {
+    return axios.post('/api/memos', newText);
+  }
 
   // deleteTodo(id) {
   //   return axios.delete(`/api/todos/${id}`);

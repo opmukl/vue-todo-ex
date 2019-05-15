@@ -43,7 +43,6 @@ export default {
   display: flex;
   flex-direction: column;
   position: relative;
-  font-family: 'Hind Siliguri', 'Noto Sans KR', sans-serif;
   color: #000;
   min-height: 100vh;
   background: #fff;

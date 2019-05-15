@@ -9,6 +9,25 @@ const actions = {
   // todos 초기화
   async loadMemos({ commit }) {
     commit('initMemos', (await api.getMemos()).data);
+  },
+
+  async addMemo({ commit }, newText) {
+    console.log(newText);
+    commit(
+      'addMemo',
+      (await api.addMemo({
+        text: newText
+      })).data
+    );
+  },
+
+  async updateMemo({ commit }, text) {
+    console.log(text);
+    // commit('updateMemo', (await api.getMemos()).data);
+  },
+
+  async updateLayout(newLayout) {
+    console.log(newLayout);
   }
 };
 const getters = {};
@@ -16,7 +35,10 @@ const getters = {};
 const mutations = {
   initMemos(state, memos) {
     state.memos = memos;
-    console.log('sss');
+    console.log(memos);
+  },
+  addMemo(state, newText) {
+    state.memos.push(newText);
   }
 };
 
