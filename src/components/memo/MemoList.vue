@@ -57,9 +57,6 @@ export default {
     GridItem: VueGridLayout.GridItem
   },
   computed: {
-    getHeight() {
-      console.log(this)
-    },
     ...mapState({
       layout: 'memos'
     })
@@ -102,11 +99,6 @@ export default {
 <style lang="scss" scoped>
 .vue-grid-item {
   background: #fff;
-  & > div {
-    width: 100%;
-    // height: 100%;
-    border: 1px solid red;
-  }
   p {
     padding: 15px;
     width: 100%;

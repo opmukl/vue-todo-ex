@@ -40,7 +40,6 @@ const getters = {};
 const mutations = {
   initMemos(state, memos) {
     state.memos = memos;
-    console.log(memos);
   },
   addMemo(state, newText) {
     console.log(Math.max(state.memos));

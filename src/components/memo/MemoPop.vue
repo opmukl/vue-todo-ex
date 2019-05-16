@@ -1,5 +1,9 @@
 <template>
-  <div class="modal-backdrop" :class="{ on: this.popup.isActive }">
+  <div
+    class="modal-backdrop"
+    :class="{ on: this.popup.isActive }"
+    @click.self="$emit('close')"
+  >
     <div class="modal" :class="{ on: this.popup.isActive }">
       <button type="button" class="btn--close" @click="$emit('close')">
         <i class="fa fa-times solid"></i>
@@ -19,10 +23,13 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
+import { textareaResize } from '../mixins/textareaResize'
+
 const { mapState, mapActions } = createNamespacedHelpers('memos')
 
 export default {
   props: ['popup'],
+  mixins: [textareaResize],
   data() {
     return {
       newText: ''
