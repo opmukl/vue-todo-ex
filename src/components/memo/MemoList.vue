@@ -19,6 +19,7 @@
         :w="memo.w"
         :h="memo.h"
         :i="memo.i"
+        :static="memo.static"
         @move="test()"
         v-show="popup.id != memo.id"
       >

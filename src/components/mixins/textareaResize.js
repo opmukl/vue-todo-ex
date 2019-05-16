@@ -8,7 +8,6 @@ export const textareaResize = {
   mounted() {
     this.$nextTick(() => {
       console.log(this.$el);
-
       this.$el.setAttribute(
         'style',
         'height:' + this.$el.scrollHeight + 'px;overflow-y:hidden;'
