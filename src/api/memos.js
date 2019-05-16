@@ -15,9 +15,9 @@ class TodosApi {
   //   return axios.delete(`/api/todos/${id}`);
   // }
 
-  // updateTodo(todo) {
-  //   return axios.patch(`/api/todos/${todo.id}`, todo);
-  // }
+  updateMemo(memo) {
+    return axios.patch(`/api/memos/${memo.id}`, memo);
+  }
 
   // updateTodoList(todos) {
   //   return axios.put(`/api/todos/${todo.id}`, todos);

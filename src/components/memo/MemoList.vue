@@ -3,7 +3,7 @@
     <grid-layout
       :layout.sync="layout"
       :col-num="6"
-      :row-height="30"
+      :row-height="56"
       :is-draggable="true"
       :vertical-compact="true"
       :margin="[10, 10]"
@@ -20,12 +20,13 @@
         :h="memo.h"
         :i="memo.i"
         @move="test()"
+        v-show="popup.id != memo.id"
       >
         <p v-html="memo.text" @click="openMemo(memo.id, memo.text)"></p>
       </grid-item>
     </grid-layout>
 
-    <memoPop :popup="popup"></memoPop>
+    <memoPop :popup="popup" @close="closeMemo()"></memoPop>
   </div>
 </template>
 
@@ -39,6 +40,14 @@ const { mapState, mapActions } = createNamespacedHelpers('memos')
 export default {
   data() {
     return {
+      isMoving: false,
+      popup: {
+        id: {
+          type: Number
+        },
+        text: '',
+        isActive: false
+      }
       // layout: []
     }
   },
@@ -56,11 +65,33 @@ export default {
     test() {
       console.log('111')
     },
-    layoutUpdatedEvent: function(newLayout) {
-      console.log('Updated layout: ', newLayout)
-      // this.updateLayout(newLayout)
+    openMemo(id, text) {
+      if (!this.isMoving) {
+        console.log(id + '/////' + text)
+        this.popup.id = id
+        this.popup.isActive = true
+        this.popup.text = text
+      }
+
+      // const memo = { id: id, text: text }
+      // this.updateMemo(memo)
     },
-    ...mapActions(['openMemo', 'updateMemo', 'updateLayout'])
+    closeMemo() {
+      this.popup = {
+        id: '',
+        text: '',
+        isActive: false
+      }
+    },
+    layoutUpdatedEvent(newLayout) {
+      // console.log('Updated layout: ', newLayout)
+      // this.updateLayout(newLayout)
+      this.isMoving = true
+      setTimeout(() => {
+        this.isMoving = false
+      }, 500)
+    },
+    ...mapActions(['updateLayout'])
   }
 }
 </script>
@@ -78,43 +109,7 @@ export default {
     width: 100%;
     word-break: break-all;
     white-space: pre-line;
-  }
-}
-
-.pop {
-  display: none;
-  position: relative;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 100;
-  &.on {
-    display: block;
-  }
-  &-inner {
-    box-sizing: border-box;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    min-width: 500px;
-
-    width: 40%;
-
-    padding: 5%;
-    min-height: 50%;
-    max-height: 90%;
-    background: #fff;
-    transform: translate(-50%, -50%);
-  }
-
-  .btn--close {
-    position: absolute;
-    top: 2%;
-    right: 2%;
-    font-size: 30px;
+    line-height: 20px;
   }
 }
 </style>

@@ -2,12 +2,7 @@ import Vue from 'vue';
 import api from '@/api/memos';
 
 const state = {
-  memos: [],
-  popup: {
-    id: '',
-    text: '',
-    isActive: false
-  }
+  memos: []
 };
 
 const actions = {
@@ -17,33 +12,28 @@ const actions = {
   },
 
   async addMemo({ commit }, newText) {
-    console.log(newText);
+    // console.log(newText);
+    // console.log(state.memos.length + 1);
     commit(
       'addMemo',
       (await api.addMemo({
+        x: 0,
+        y: 0,
+        w: 2,
+        h: 1,
+        i: state.memos.length,
         text: newText
       })).data
     );
   },
 
-  async updateMemo({ commit }, text) {
-    console.log(text);
-    // commit('updateMemo', (await api.getMemos()).data);
+  async updateMemo({ commit }, memo) {
+    // console.log(memo);
+    commit('updateMemo', (await api.updateMemo(memo)).data);
   },
 
   async updateLayout(newLayout) {
     console.log(newLayout);
-  },
-
-  openMemo({ commit }, { id, text }) {
-    // console.log(text)
-    this.popup.isActive = true;
-    this.popup.text = text;
-    this.updateMemo(text);
-  },
-  closeMemo() {
-    this.popup.isActive = false;
-    this.popup.text = '';
   }
 };
 const getters = {};
@@ -55,6 +45,13 @@ const mutations = {
   },
   addMemo(state, newText) {
     state.memos.push(newText);
+  },
+  updateMemo(state, memo) {
+    const selectedIdx = state.memos.findIndex(m => m.id === memo.id);
+    Vue.set(state.memos, selectedIdx, memo);
+
+    // console.log(state);
+    // console.log(memo);
   }
 };
 
