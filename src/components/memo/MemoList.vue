@@ -3,7 +3,7 @@
     <grid-layout
       :layout.sync="layout"
       :col-num="6"
-      :row-height="56"
+      :row-height="50"
       :is-draggable="true"
       :vertical-compact="true"
       :margin="[10, 10]"
@@ -57,6 +57,9 @@ export default {
     GridItem: VueGridLayout.GridItem
   },
   computed: {
+    getHeight() {
+      console.log(this)
+    },
     ...mapState({
       layout: 'memos'
     })
@@ -84,7 +87,7 @@ export default {
       }
     },
     layoutUpdatedEvent(newLayout) {
-      // console.log('Updated layout: ', newLayout)
+      console.log('Updated layout: ', newLayout)
       // this.updateLayout(newLayout)
       this.isMoving = true
       setTimeout(() => {
@@ -105,7 +108,7 @@ export default {
     border: 1px solid red;
   }
   p {
-    padding: 10%;
+    padding: 15px;
     width: 100%;
     word-break: break-all;
     white-space: pre-line;
