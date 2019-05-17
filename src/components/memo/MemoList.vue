@@ -23,6 +23,14 @@
         v-show="popup.id != memo.id"
       >
         <p v-html="memo.text" @click="openMemo(memo)"></p>
+        <aside>
+          <button class="btn-static">
+            <i class="fa fa-thumbtack" :class="{ static: memo.static }"></i>
+          </button>
+          <button @click="deleteMemo(memo.id)">
+            <i class="fa fa-trash-alt"></i>
+          </button>
+        </aside>
       </grid-item>
     </grid-layout>
 
@@ -69,9 +77,6 @@ export default {
           date: date,
           isActive: true
         }
-        // this.popup.id = id
-        // this.popup.isActive = true
-        // this.popup.text = text
       }
     },
     closeMemo() {
@@ -89,7 +94,7 @@ export default {
         this.isMoving = false
       }, 500)
     },
-    ...mapActions(['updateLayout'])
+    ...mapActions(['deleteMemo', 'updateLayout'])
   }
 }
 </script>
@@ -106,6 +111,24 @@ export default {
     word-break: break-all;
     white-space: pre-line;
     line-height: 22px;
+  }
+
+  aside {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    width: 100%;
+    padding: 0 20px 10px;
+    justify-content: space-between;
+    .btn-static {
+      i {
+        transform: rotate(45deg);
+        &.static {
+          transform: rotate(0deg);
+        }
+      }
+    }
   }
 }
 </style>

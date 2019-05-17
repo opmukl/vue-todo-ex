@@ -26,6 +26,12 @@ const actions = {
     );
   },
 
+  async deleteMemo({ commit }, id) {
+    if (!confirm('정말 삭제하시겠습니까??')) return;
+    await api.deleteMemo(id);
+    commit('deleteMemo', id);
+  },
+
   async updateMemo({ commit }, memo) {
     // console.log(memo);
     commit('updateMemo', (await api.updateMemo(memo)).data);
@@ -43,6 +49,10 @@ const mutations = {
   },
   addMemo(state, newText) {
     state.memos.push(newText);
+  },
+  deleteMemo(state, id) {
+    const selectedIdx = state.memos.findIndex(memo => memo.id === id);
+    if (selectedIdx > -1) state.memos.splice(selectedIdx, 1);
   },
   updateMemo(state, memo) {
     const selectedIdx = state.memos.findIndex(m => m.id === memo.id);
