@@ -24,7 +24,7 @@
       >
         <p v-html="memo.text" @click="openMemo(memo)"></p>
         <aside>
-          <button class="btn-static">
+          <button class="btn-static" @click="switchStatic(memo)">
             <i class="fa fa-thumbtack" :class="{ static: memo.static }"></i>
           </button>
           <button @click="deleteMemo(memo.id)">
@@ -94,7 +94,7 @@ export default {
         this.isMoving = false
       }, 500)
     },
-    ...mapActions(['deleteMemo', 'updateLayout'])
+    ...mapActions(['switchStatic', 'deleteMemo', 'updateLayout'])
   }
 }
 </script>
@@ -119,8 +119,9 @@ export default {
     left: 0;
     display: flex;
     width: 100%;
-    padding: 0 20px 10px;
+    padding: 10px 20px;
     justify-content: space-between;
+    border-top: 1px solid #bdbdbd;
     .btn-static {
       i {
         transform: rotate(45deg);
