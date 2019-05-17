@@ -12,18 +12,18 @@ const actions = {
   },
 
   async addMemo({ commit }, newText) {
-    console.log(newText.length);
-    // commit(
-    //   'addMemo',
-    //   (await api.addMemo({
-    //     x: 0,
-    //     y: 0,
-    //     w: 2,
-    //     h: 1,
-    //     i: state.memos.length,
-    //     text: newText
-    //   })).data
-    // );
+    commit(
+      'addMemo',
+      (await api.addMemo({
+        x: 0,
+        y: 0,
+        w: 2,
+        h: 3,
+        i: state.memos.length,
+        text: newText,
+        date: new Date()
+      })).data
+    );
   },
 
   async updateMemo({ commit }, memo) {
@@ -42,7 +42,6 @@ const mutations = {
     state.memos = memos;
   },
   addMemo(state, newText) {
-    console.log(Math.max(state.memos));
     state.memos.push(newText);
   },
   updateMemo(state, memo) {

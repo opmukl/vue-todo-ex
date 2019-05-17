@@ -9,23 +9,24 @@
         <i class="fa fa-times solid"></i>
       </button>
       <textarea
+        ref="memoTextarea"
         v-model="newText"
-        @blur="
-          updateMemo({
-            id: popup.id,
-            text: newText
-          })
-        "
+        @blur="validateMemo"
+        v-validate="'required'"
       ></textarea>
+      <aside>
+        수정된 시간: <time>{{ popup.date | tranlateDate }}</time>
+      </aside>
     </div>
   </div>
 </template>
 
 <script>
+import moment from 'moment'
 import { createNamespacedHelpers } from 'vuex'
 import { textareaResize } from '../mixins/textareaResize'
 
-const { mapState, mapActions } = createNamespacedHelpers('memos')
+const { mapActions } = createNamespacedHelpers('memos')
 
 export default {
   props: ['popup'],
@@ -45,7 +46,25 @@ export default {
       this.newText = this.popup.text
     }
   },
+  filters: {
+    tranlateDate(data) {
+      return moment(data).format('YYYY-MM-DD, h:mm:ss a')
+    }
+  },
   methods: {
+    validateMemo() {
+      this.$validator.validateAll().then(result => {
+        if (!result) {
+          alert('내용을 입력해주세요.')
+          return
+        }
+        this.updateMemo({
+          id: this.popup.id,
+          text: this.newText,
+          date: new Date()
+        })
+      })
+    },
     close() {
       this.$emit('close')
     },
@@ -68,16 +87,12 @@ export default {
     z-index: 100;
     opacity: 0;
     transition: opacity 0.5s;
-    // transform: scale(0);
-    // transition: all 0.2s ease-in-out;
     &.on {
       width: 100%;
       height: 100%;
       opacity: 1;
       visibility: visible;
       transition: opacity 0.5s;
-      // transform: scale(1);
-      // transition: all 0.2s ease-in-out;
     }
   }
 
@@ -87,9 +102,10 @@ export default {
   left: 50%;
   width: 40%;
   min-width: 500px;
+  height: 50%;
+  // min-height: 50%;
+  // max-height: 90%;
   padding: 5%;
-  min-height: 50%;
-  max-height: 90%;
   background: #fff;
   transform: scale(0) translate(-50%, -50%);
   transform-origin: center center;
@@ -101,10 +117,12 @@ export default {
 
   textarea {
     width: 100%;
-    height: auto;
+    height: 90% !important;
     border: none;
     outline: none;
     font-size: 20px;
+    resize: none;
+    overflow-y: auto !important;
   }
 
   .btn--close {
@@ -112,6 +130,14 @@ export default {
     top: 2%;
     right: 2%;
     font-size: 30px;
+  }
+
+  aside {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 14px;
+    color: #4c4c4c;
   }
 }
 </style>

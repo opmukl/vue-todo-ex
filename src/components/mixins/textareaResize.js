@@ -7,17 +7,22 @@ export const textareaResize = {
   },
   mounted() {
     this.$nextTick(() => {
-      console.log(this.$el);
-      this.$el.setAttribute(
+      // console.log(this.$refs['memoTextarea']);
+      this.$refs['memoTextarea'].setAttribute(
         'style',
-        'height:' + this.$el.scrollHeight + 'px;overflow-y:hidden;'
+        'height:' +
+          this.$refs['memoTextarea'].scrollHeight +
+          'px;overflow-y:hidden;'
       );
     });
 
-    this.$el.addEventListener('input', this.resizeTextarea);
+    this.$refs['memoTextarea'].addEventListener('input', this.resizeTextarea);
   },
   beforeDestroy() {
-    this.$el.removeEventListener('input', this.resizeTextarea);
+    this.$refs['memoTextarea'].removeEventListener(
+      'input',
+      this.resizeTextarea
+    );
   },
   render() {
     return this.$slots.default[0];

@@ -1,9 +1,11 @@
 <template>
   <textarea
+    ref="memoTextarea"
     rows="1"
     placeholder="메모를 입력해주세요."
     v-model="newText"
-    @blur="addMemo(newText)"
+    @blur="validateMemo"
+    v-validate="'required'"
     @input="resizeTextarea($event)"
   ></textarea>
 </template>
@@ -22,6 +24,15 @@ export default {
     }
   },
   methods: {
+    validateMemo() {
+      this.$validator.validateAll().then(result => {
+        if (!result) {
+          alert('내용을 입력해주세요.')
+          return
+        }
+        this.addMemo(this.newText)
+      })
+    },
     ...mapActions(['addMemo'])
   }
 }
@@ -36,5 +47,6 @@ textarea {
   font-size: 20px;
   border: 0;
   border-bottom: 2px dashed #9e9e9e;
+  resize: none;
 }
 </style>

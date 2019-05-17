@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import App from './App.vue';
 import store from '@/store/index';
-import VeeValidator from 'vee-validate';
 import router from '@/router';
+import VeeValidator from 'vee-validate';
 
 Vue.use(VeeValidator);
 Vue.config.productionTip = false;

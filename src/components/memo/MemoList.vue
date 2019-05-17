@@ -6,7 +6,7 @@
       :row-height="50"
       :is-draggable="true"
       :vertical-compact="true"
-      :margin="[10, 10]"
+      :margin="[20, 20]"
       :use-css-transforms="true"
       :autoSize="true"
       @layout-updated="layoutUpdatedEvent"
@@ -20,10 +20,9 @@
         :h="memo.h"
         :i="memo.i"
         :static="memo.static"
-        @move="test()"
         v-show="popup.id != memo.id"
       >
-        <p v-html="memo.text" @click="openMemo(memo.id, memo.text)"></p>
+        <p v-html="memo.text" @click="openMemo(memo)"></p>
       </grid-item>
     </grid-layout>
 
@@ -32,11 +31,10 @@
 </template>
 
 <script>
-import memoPop from './MemoPop'
 import VueGridLayout from 'vue-grid-layout'
-
+import memoPop from './MemoPop'
 import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapActions } = createNamespacedHelpers('memos')
+const { mapState, mapGetters, mapActions } = createNamespacedHelpers('memos')
 
 export default {
   data() {
@@ -63,19 +61,18 @@ export default {
     })
   },
   methods: {
-    test() {
-      console.log('111')
-    },
-    openMemo(id, text) {
+    openMemo({ id, text, date }) {
       if (!this.isMoving) {
-        console.log(id + '/////' + text)
-        this.popup.id = id
-        this.popup.isActive = true
-        this.popup.text = text
+        this.popup = {
+          id: id,
+          text: text,
+          date: date,
+          isActive: true
+        }
+        // this.popup.id = id
+        // this.popup.isActive = true
+        // this.popup.text = text
       }
-
-      // const memo = { id: id, text: text }
-      // this.updateMemo(memo)
     },
     closeMemo() {
       this.popup = {
@@ -99,13 +96,16 @@ export default {
 
 <style lang="scss" scoped>
 .vue-grid-item {
+  padding: 15px;
   background: #fff;
+  box-shadow: 10px 10px 15px 0px rgba(0, 0, 0, 0.2);
   p {
-    padding: 15px;
     width: 100%;
+    height: 100%;
+    overflow: hidden;
     word-break: break-all;
     white-space: pre-line;
-    line-height: 20px;
+    line-height: 22px;
   }
 }
 </style>
