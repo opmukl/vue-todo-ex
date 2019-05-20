@@ -38,9 +38,13 @@ const actions = {
   },
 
   async switchStatic({ commit }, memo) {
-    console.log(memo);
-    const test = { ...memo, static: !static };
-    // await api.updateMemo({ id: id, static: !static }).data;
+    // console.log(memo);
+    // const test = { ...memo, static: !memo.static };
+    // console.log(test);
+    commit(
+      'updateMemo',
+      (await api.updateMemo({ ...memo, static: !memo.static })).data
+    );
   },
 
   async updateLayout(newLayout) {
