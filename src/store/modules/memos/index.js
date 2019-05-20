@@ -12,12 +12,14 @@ const actions = {
   },
 
   async addMemo({ commit }, newText) {
+    const ramdomXPos = Math.floor(Math.random() * (3 - 0)) + 0;
+    console.log(ramdomXPos);
     commit(
       'addMemo',
       (await api.addMemo({
-        x: 0,
-        y: 0,
-        w: 2,
+        x: ramdomXPos,
+        y: 3,
+        w: 1,
         h: 3,
         i: state.memos.length,
         text: newText,
@@ -47,8 +49,10 @@ const actions = {
     );
   },
 
-  async updateLayout(newLayout) {
-    console.log(newLayout);
+  async updateLayout({ commit }, memos) {
+    await Promise.all(memos.map(memo => api.deleteMemo(memo.id)));
+    const values = await Promise.all(memos.map(memo => api.addMemo(memo)));
+    commit('initMemos', values.map(value => value.data));
   }
 };
 const getters = {};
@@ -57,19 +61,19 @@ const mutations = {
   initMemos(state, memos) {
     state.memos = memos;
   },
+
   addMemo(state, newText) {
     state.memos.push(newText);
   },
+
   deleteMemo(state, id) {
     const selectedIdx = state.memos.findIndex(memo => memo.id === id);
     if (selectedIdx > -1) state.memos.splice(selectedIdx, 1);
   },
+
   updateMemo(state, memo) {
     const selectedIdx = state.memos.findIndex(m => m.id === memo.id);
     Vue.set(state.memos, selectedIdx, memo);
-
-    // console.log(state);
-    // console.log(memo);
   }
 };
 

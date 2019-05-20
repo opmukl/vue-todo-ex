@@ -31,6 +31,7 @@ export default {
           return
         }
         this.addMemo(this.newText)
+        this.newText = ''
       })
     },
     ...mapActions(['addMemo'])

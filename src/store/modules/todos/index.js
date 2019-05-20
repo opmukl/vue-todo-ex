@@ -51,7 +51,7 @@ const actions = {
     const values = await Promise.all(
       todos.map(todo => api.addTodo({ text: todo.text, done: todo.done }))
     );
-    commit('updateTodoList', values.map(value => value.data));
+    commit('initTodos', values.map(value => value.data));
   }
 };
 const getters = {
@@ -77,10 +77,6 @@ const mutations = {
   updateTodo(state, todo) {
     const selectedIdx = state.todos.findIndex(t => t.id === todo.id);
     Vue.set(state.todos, selectedIdx, todo);
-  },
-
-  updateTodoList(state, todos) {
-    state.todos = todos;
   }
 };
 

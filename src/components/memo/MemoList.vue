@@ -1,10 +1,11 @@
 <template>
-  <div>
+  <section class="memo-list">
     <grid-layout
       :layout.sync="layout"
-      :col-num="6"
+      :col-num="3"
       :row-height="50"
       :is-draggable="true"
+      :is-resizable="false"
       :vertical-compact="true"
       :margin="[20, 20]"
       :use-css-transforms="true"
@@ -35,7 +36,7 @@
     </grid-layout>
 
     <memoPop :popup="popup" @close="closeMemo()"></memoPop>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -87,8 +88,9 @@ export default {
       }
     },
     layoutUpdatedEvent(newLayout) {
-      console.log('Updated layout: ', newLayout)
-      // this.updateLayout(newLayout)
+      // console.log('Updated layout: ', newLayout)
+      this.updateLayout(newLayout)
+
       this.isMoving = true
       setTimeout(() => {
         this.isMoving = false
@@ -100,13 +102,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.memo-list {
+  min-height: calc(100vh - 43px - 72px - 40px);
+}
 .vue-grid-item {
   padding: 15px;
   background: #fff;
   box-shadow: 10px 10px 15px 0px rgba(0, 0, 0, 0.2);
   p {
     width: 100%;
-    height: 100%;
+    height: calc(100% - 36px);
     overflow: hidden;
     word-break: break-all;
     white-space: pre-line;
