@@ -1,6 +1,9 @@
 <template>
   <section id="todo">
-    <TodoHeader></TodoHeader>
+    <slot name="header">
+      <h1>TODOS</h1>
+    </slot>
+    <!-- <TodoHeader></TodoHeader> -->
 
     <section class="section-todos">
       <TodoInput></TodoInput>
@@ -9,7 +12,7 @@
   </section>
 </template>
 <script>
-import TodoHeader from './TodoHeader'
+// import TodoHeader from './TodoHeader'
 import TodoInput from './TodoInput'
 import TodoList from './TodoList'
 
@@ -22,7 +25,7 @@ export default {
     return {}
   },
   components: {
-    TodoHeader,
+    // TodoHeader,
     TodoInput,
     TodoList
   },
@@ -39,6 +42,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h1 {
+  font-size: 50px;
+  padding: 50px 0;
+  background: #82b1ff;
+}
 #todo {
   display: flex;
   flex-direction: column;

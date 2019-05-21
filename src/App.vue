@@ -1,8 +1,9 @@
 <template>
   <div id="app">
     <Navi></Navi>
-    <!-- 루트 컴포넌트인 App.vue에 라우터 뷰 추가 -->
-    <router-view></router-view>
+    <router-view>
+      <template slot="header"></template>
+    </router-view>
     <Footer></Footer>
   </div>
 </template>
@@ -51,29 +52,4 @@ button {
 textarea {
   font-family: 'Hind Siliguri', 'Noto Sans KR', sans-serif;
 }
-
-// nav {
-//   position: sticky;
-//   top: 0;
-//   left: 0;
-//   text-align: center;
-//   z-index: 10;
-//   button {
-//     width: 50%;
-//     height: 40px;
-//     font-family: 'Noto Sans KR', sans-serif;
-//     font-size: 18px;
-//     a {
-//       display: block;
-//       background: #bbb;
-//       line-height: 40px;
-//       color: #fff;
-//       text-decoration: none;
-
-//       &.router-link-exact-active {
-//         background: #4c4c4c;
-//       }
-//     }
-//   }
-// }
 </style>

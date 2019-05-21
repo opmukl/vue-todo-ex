@@ -1,8 +1,10 @@
 <template>
-  <nav>
-    <button><router-link to="/todo">Todos</router-link></button>
-    <button><router-link to="/memo">Memo</router-link></button>
-  </nav>
+  <div>
+    <nav>
+      <button><router-link to="/todo">Todos</router-link></button>
+      <button><router-link to="/memo">Memo</router-link></button>
+    </nav>
+  </div>
 </template>
 
 <script>

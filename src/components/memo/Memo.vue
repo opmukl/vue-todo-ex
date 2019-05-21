@@ -1,5 +1,8 @@
 <template>
   <div>
+    <slot name="header">
+      <h1>MEMOS</h1>
+    </slot>
     <memoInput></memoInput>
     <memoList :memos="memos"></memoList>
   </div>
@@ -8,7 +11,6 @@
 <script>
 import memoInput from './MemoInput'
 import memoList from './MemoList'
-// import { mapActions } from 'vuex';
 
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapActions } = createNamespacedHelpers('memos')
@@ -34,3 +36,11 @@ export default {
 }
 </script>
 
+<style lang="scss" scoped>
+h1 {
+  font-size: 50px;
+  padding: 50px 0;
+  background: #82b1ff;
+  text-align: center;
+}
+</style>

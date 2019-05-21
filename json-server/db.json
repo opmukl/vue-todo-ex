@@ -18,37 +18,39 @@
   ],
   "memos": [
     {
-      "x": 0,
+      "x": 1,
       "y": 0,
       "w": 1,
       "h": 3,
       "i": 0,
-      "text": "메모추가\n=",
-      "date": "2019-05-20T07:05:55.428Z",
+      "text": "success/error 처리 (catch/try) 추가하기\n수정해보기 \n오오오\n오호홓\n호호호\n호호호호\n아아아\n길어지면\n룰루랄라\n처리를 \n어떻게",
+      "date": "2019-05-20T07:22:02.970Z",
       "id": 1,
-      "moved": false
+      "moved": false,
+      "static": false
     },
     {
-      "x": 1,
+      "x": 2,
       "y": 0,
       "w": 1,
       "h": 3,
       "i": 1,
-      "text": "음음음음",
-      "date": "2019-05-20T07:06:02.750Z",
+      "text": "이얍이얍",
+      "date": "2019-05-20T07:12:56.406Z",
       "id": 2,
       "moved": false
     },
     {
-      "x": 1,
+      "x": 2,
       "y": 3,
       "w": 1,
       "h": 3,
       "i": 2,
-      "text": "success/error 처리 (catch/try) 추가하기\n수정해보기 ",
-      "date": "2019-05-20T07:07:52.376Z",
+      "text": "메모추가",
+      "date": "2019-05-21T07:18:02.400Z",
       "id": 3,
-      "moved": false
+      "moved": false,
+      "static": true
     }
   ]
 }

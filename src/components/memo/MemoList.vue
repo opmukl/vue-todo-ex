@@ -25,16 +25,32 @@
       >
         <p v-html="memo.text" @click="openMemo(memo)"></p>
         <aside>
-          <button class="btn-static" @click="switchStatic(memo)">
-            <i class="fa fa-thumbtack" :class="{ static: memo.static }"></i>
+          <button
+            type="button"
+            class="btn btn-static"
+            @click="switchStatic(memo)"
+          >
+            <i class="fa fa-thumbtack" :class="{ static: memo.static }"></i
+            >고정하기
           </button>
-          <button @click="deleteMemo(memo.id)">
+          <button type="button" class="btn" @mouseover="showPalette($event)">
+            <i class="fa fa-palette"></i>색깔선택
+          </button>
+          <button type="button" class="btn" @click="deleteMemo(memo.id)">
             <i class="fa fa-trash-alt"></i>
+            삭제하기
           </button>
         </aside>
       </grid-item>
     </grid-layout>
-
+    <div class="color-palette" ref="colorPalette">
+      <button type="button" class="">색상1</button>
+      <button type="button" class="">색상2</button>
+      <button type="button" class="">색상3</button>
+      <button type="button" class="">색상4</button>
+      <button type="button" class="">색상5</button>
+      <button type="button" class="">색상6</button>
+    </div>
     <memoPop :popup="popup" @close="closeMemo()"></memoPop>
   </section>
 </template>
@@ -70,6 +86,15 @@ export default {
     })
   },
   methods: {
+    showPalette(e) {
+      console.log(e)
+      $(this.$refs.colorPalette)
+        .fadeIn()
+        .css({
+          left: e.pageX,
+          top: e.pageY
+        })
+    },
     openMemo({ id, text, date }) {
       if (!this.isMoving) {
         this.popup = {
@@ -87,9 +112,9 @@ export default {
         isActive: false
       }
     },
-    layoutUpdatedEvent(newLayout) {
+    layoutUpdatedEvent(memos) {
       // console.log('Updated layout: ', newLayout)
-      this.updateLayout(newLayout)
+      this.updateLayout(memos)
 
       this.isMoving = true
       setTimeout(() => {
@@ -103,6 +128,7 @@ export default {
 
 <style lang="scss" scoped>
 .memo-list {
+  position: relative;
   min-height: calc(100vh - 43px - 72px - 40px);
 }
 .vue-grid-item {
@@ -127,14 +153,42 @@ export default {
     padding: 10px 20px;
     justify-content: space-between;
     border-top: 1px solid #bdbdbd;
-    .btn-static {
+
+    .btn {
+      font-size: 0;
       i {
-        transform: rotate(45deg);
-        &.static {
-          transform: rotate(0deg);
+        font-size: 14px;
+      }
+      &-static {
+        i {
+          transform: rotate(45deg);
+          &.static {
+            transform: rotate(0deg);
+          }
         }
       }
     }
+  }
+}
+
+.color-palette {
+  display: none;
+  position: absolute;
+  left: 50%;
+  bottom: 30px;
+  width: 82px;
+  padding: 5px;
+  background: #fff;
+  box-shadow: 10px 10px 15px 0px rgba(0, 0, 0, 0.2);
+  transform: translate(-50%, -50%);
+  button {
+    background: #ddd;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    font-size: 0;
+    margin: 2px;
   }
 }
 </style>
