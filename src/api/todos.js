@@ -1,26 +1,27 @@
 import axios from 'axios';
+const apiUrl = `api/todos/`;
 
 class TodosApi {
   constructor() {}
 
   getTodos() {
-    return axios.get('/api/todos');
+    return axios.get(apiUrl);
   }
 
   addTodo(newTodo) {
-    return axios.post('/api/todos', newTodo);
+    return axios.post(apiUrl, newTodo);
   }
 
   deleteTodo(id) {
-    return axios.delete(`/api/todos/${id}`);
+    return axios.delete(apiUrl + `${id}`);
   }
 
   updateTodo(todo) {
-    return axios.patch(`/api/todos/${todo.id}`, todo);
+    return axios.patch(apiUrl + `${todo.id}`, todo);
   }
 
   updateTodoList(todos) {
-    return axios.put(`/api/todos/${todo.id}`, todos);
+    return axios.put(apiUrl, todos);
   }
 }
 

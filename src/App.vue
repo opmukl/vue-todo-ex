@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Navi></Navi>
-    <router-view>
+    <router-view class="content">
       <template v-slot:header></template>
     </router-view>
     <Footer></Footer>
@@ -47,6 +47,14 @@ button {
   max-width: 800px;
   margin: 0 auto;
   font-family: 'Hind Siliguri', 'Noto Sans KR', sans-serif;
+
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+
+  .content {
+    flex: 1;
+  }
 }
 
 textarea {

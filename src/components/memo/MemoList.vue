@@ -1,6 +1,52 @@
 <template>
   <section class="memo-list">
     <grid-layout
+      class="memo-list--static"
+      :layout.sync="layout"
+      :col-num="3"
+      :row-height="50"
+      :is-draggable="true"
+      :is-resizable="false"
+      :vertical-compact="true"
+      :margin="[20, 20]"
+      :use-css-transforms="true"
+      :autoSize="true"
+      @layout-updated="layoutUpdatedEvent"
+    >
+      <grid-item
+        v-for="(memo, index) in staticMemos"
+        :key="index"
+        :x="memo.x"
+        :y="memo.y"
+        :w="memo.w"
+        :h="memo.h"
+        :i="memo.i"
+        :static="memo.static"
+        :class="{ hide: popup.id == memo.id }"
+      >
+        <p v-html="memo.text" @click="openMemo(memo)"></p>
+        <aside>
+          <button
+            type="button"
+            class="btn btn-static"
+            @click="switchStatic(memo.id)"
+          >
+            <i class="fa fa-thumbtack" :class="{ static: memo.static }"></i
+            >고정하기
+          </button>
+          <button type="button" class="btn">
+            <!-- <button type="button" class="btn" @mouseover="showPalette($event)"> -->
+            <i class="fa fa-palette"></i>색깔선택
+          </button>
+          <button type="button" class="btn" @click="deleteMemo(memo.id)">
+            <i class="fa fa-trash-alt"></i>
+            삭제하기
+          </button>
+        </aside>
+      </grid-item>
+    </grid-layout>
+
+    <grid-layout
       :layout.sync="layout"
       :col-num="3"
       :row-height="50"
@@ -21,7 +67,7 @@
         :h="memo.h"
         :i="memo.i"
         :static="memo.static"
-        v-show="popup.id != memo.id"
+        :class="{ hide: popup.id == memo.id }"
       >
         <p v-html="memo.text" @click="openMemo(memo)"></p>
         <aside>
@@ -83,7 +129,8 @@ export default {
   },
   computed: {
     ...mapState({
-      layout: 'memos'
+      layout: 'memos',
+      staticMemos: 'staticMemos'
     })
   },
   methods: {
@@ -130,12 +177,28 @@ export default {
 <style lang="scss" scoped>
 .memo-list {
   position: relative;
-  min-height: calc(100vh - 43px - 72px - 40px);
+  &--static {
+    display: flex;
+    padding: 10px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: auto !important;
+    border-bottom: 2px dotted #9e9e9e;
+
+    .vue-grid-item {
+      position: relative !important;
+      transform: initial !important;
+      margin: 10px;
+    }
+  }
 }
 .vue-grid-item {
   padding: 15px;
   background: #fff;
   box-shadow: 10px 10px 15px 0px rgba(0, 0, 0, 0.2);
+  &.hide {
+    opacity: 0.5;
+  }
   p {
     width: 100%;
     height: calc(100% - 36px);

@@ -50,6 +50,8 @@ export default {
 
 <style lang="scss" scoped>
 textarea {
+  position: sticky;
+  top: 40px;
   width: 100%;
   height: 60px;
   padding: 20px;
@@ -58,5 +60,6 @@ textarea {
   border: 0;
   border-bottom: 2px dashed #9e9e9e;
   resize: none;
+  z-index: 10;
 }
 </style>

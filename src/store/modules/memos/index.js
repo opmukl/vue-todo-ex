@@ -2,14 +2,23 @@ import Vue from 'vue';
 import api from '@/api/memos';
 
 const state = {
-  memos: []
+  memos: [],
+  staticMemos: []
 };
 
 const actions = {
-  // 초기화
+  // 메모 불러오기
   async loadMemos({ commit }) {
     try {
-      commit('initMemos', (await api.getMemos()).data);
+      const memoList = (await api.getMemos()).data;
+      const staticMeemoList = (await api.getStaticMemos()).data;
+      Promise.all([memoList, staticMeemoList]).then(values => {
+        // console.log(values[0]);
+        // console.log(values[1]);
+        commit('initMemos', values[0]);
+        commit('initStaticMemos', values[1]);
+      });
+      // commit('initMemos', (await api.getMemos()).data);
     } catch (e) {
       alert(e);
     }
@@ -53,11 +62,21 @@ const actions = {
     }
   },
 
-  async switchStatic({ commit }, id) {
+  async switchStatic({ dispatch, commit }, id) {
     try {
       let memo = (await api.getMemo(id)).data;
       memo.static = !memo.static;
       commit('updateMemo', (await api.updateMemo(memo)).data);
+      dispatch('loadMemos');
+    } catch (e) {
+      alert(e);
+    }
+  },
+
+  async getStaticMemos({ commit }) {
+    try {
+      commit('initStaticMemo', (await api.getStaticMemos()).data);
+      // console.log((await api.getFixedMemos()).data);
     } catch (e) {
       alert(e);
     }
@@ -77,6 +96,10 @@ const actions = {
 const mutations = {
   initMemos(state, memos) {
     state.memos = memos;
+  },
+
+  initStaticMemos(state, memo) {
+    state.staticMemos = memo;
   },
 
   addMemo(state, newText) {

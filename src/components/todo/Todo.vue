@@ -45,7 +45,8 @@ export default {
 h1 {
   font-size: 50px;
   padding: 50px 0;
-  background: #82b1ff;
+  background: #4d82cb;
+  color: #fff;
 }
 #todo {
   display: flex;
