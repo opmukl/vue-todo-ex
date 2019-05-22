@@ -181,7 +181,6 @@ export default {
     display: flex;
     padding: 10px;
     flex-wrap: wrap;
-    justify-content: space-between;
     height: auto !important;
     border-bottom: 2px dotted #9e9e9e;
 

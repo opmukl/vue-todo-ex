@@ -7,7 +7,6 @@
     @blur="validateMemo"
     v-validate="'required'"
     @input="resizeTextarea($event)"
-    v-focus
   ></textarea>
 </template>
 
