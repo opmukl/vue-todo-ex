@@ -6,56 +6,73 @@ const state = {
 };
 
 const actions = {
-  // todos 초기화
+  // 초기화
   async loadMemos({ commit }) {
-    commit('initMemos', (await api.getMemos()).data);
+    try {
+      commit('initMemos', (await api.getMemos()).data);
+    } catch (e) {
+      alert(e);
+    }
   },
 
   async addMemo({ commit }, newText) {
-    const ramdomXPos = Math.floor(Math.random() * (3 - 0)) + 0;
-    console.log(ramdomXPos);
-    commit(
-      'addMemo',
-      (await api.addMemo({
-        x: ramdomXPos,
-        y: 3,
-        w: 1,
-        h: 3,
-        i: state.memos.length,
-        text: newText,
-        date: new Date()
-      })).data
-    );
+    try {
+      const ramdomXPos = Math.floor(Math.random() * (3 - 0)) + 0;
+      commit(
+        'addMemo',
+        (await api.addMemo({
+          x: ramdomXPos,
+          y: 3,
+          w: 1,
+          h: 3,
+          i: state.memos.length,
+          text: newText,
+          date: new Date()
+        })).data
+      );
+    } catch (e) {
+      alert(e);
+    }
   },
 
   async deleteMemo({ commit }, id) {
-    if (!confirm('정말 삭제하시겠습니까??')) return;
-    await api.deleteMemo(id);
-    commit('deleteMemo', id);
+    try {
+      if (!confirm('정말 삭제하시겠습니까??')) return;
+      await api.deleteMemo(id);
+      commit('deleteMemo', id);
+    } catch (e) {
+      alert(e);
+    }
   },
 
   async updateMemo({ commit }, memo) {
-    // console.log(memo);
-    commit('updateMemo', (await api.updateMemo(memo)).data);
+    try {
+      commit('updateMemo', (await api.updateMemo(memo)).data);
+    } catch (e) {
+      alert(e);
+    }
   },
 
-  async switchStatic({ commit }, memo) {
-    // console.log(memo);
-    // const test = { ...memo, static: !memo.static };
-    // console.log(test);
-    commit(
-      'updateMemo',
-      (await api.updateMemo({ ...memo, static: !memo.static })).data
-    );
+  async switchStatic({ commit }, id) {
+    try {
+      let memo = (await api.getMemo(id)).data;
+      memo.static = !memo.static;
+      commit('updateMemo', (await api.updateMemo(memo)).data);
+    } catch (e) {
+      alert(e);
+    }
   },
 
   async updateLayout({ commit }, memos) {
-    await Promise.all(memos.map(memo => api.deleteMemo(memo.id)));
-    const values = await Promise.all(memos.map(memo => api.addMemo(memo)));
-    commit('initMemos', values.map(value => value.data));
+    try {
+      await Promise.all(memos.map(memo => api.deleteMemo(memo.id)));
+      const values = await Promise.all(memos.map(memo => api.addMemo(memo)));
+      commit('initMemos', values.map(value => value.data));
+    } catch (e) {
+      alert(e);
+    }
   }
 };
-const getters = {};
 
 const mutations = {
   initMemos(state, memos) {
@@ -80,7 +97,6 @@ const mutations = {
 export default {
   namespaced: true,
   state,
-  getters,
   actions,
   mutations
 };

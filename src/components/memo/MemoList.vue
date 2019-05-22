@@ -28,12 +28,13 @@
           <button
             type="button"
             class="btn btn-static"
-            @click="switchStatic(memo)"
+            @click="switchStatic(memo.id)"
           >
             <i class="fa fa-thumbtack" :class="{ static: memo.static }"></i
             >고정하기
           </button>
-          <button type="button" class="btn" @mouseover="showPalette($event)">
+          <button type="button" class="btn">
+            <!-- <button type="button" class="btn" @mouseover="showPalette($event)"> -->
             <i class="fa fa-palette"></i>색깔선택
           </button>
           <button type="button" class="btn" @click="deleteMemo(memo.id)">
@@ -59,7 +60,7 @@
 import VueGridLayout from 'vue-grid-layout'
 import memoPop from './MemoPop'
 import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapGetters, mapActions } = createNamespacedHelpers('memos')
+const { mapState, mapActions } = createNamespacedHelpers('memos')
 
 export default {
   data() {

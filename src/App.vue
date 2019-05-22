@@ -2,7 +2,7 @@
   <div id="app">
     <Navi></Navi>
     <router-view>
-      <template slot="header"></template>
+      <template v-slot:header></template>
     </router-view>
     <Footer></Footer>
   </div>

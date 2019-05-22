@@ -12,7 +12,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import { createNamespacedHelpers } from 'vuex'
 import { textareaResize } from '../mixins/textareaResize'
 const { mapActions } = createNamespacedHelpers('memos')
@@ -41,18 +40,12 @@ export default {
   directives: {
     focus: {
       // 디렉티브 정의
-      inserted: function(el) {
+      inserted(el) {
         el.focus()
       }
     }
   }
 }
-
-Vue.directive('focus', {
-  inserted: function(el) {
-    el.focus()
-  }
-})
 </script>
 
 <style lang="scss" scoped>

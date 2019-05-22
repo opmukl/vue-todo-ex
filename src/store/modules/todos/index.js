@@ -8,25 +8,37 @@ const state = {
 const actions = {
   // todos 초기화
   async loadTodos({ commit }) {
-    commit('initTodos', (await api.getTodos()).data);
+    try {
+      commit('initTodos', (await api.getTodos()).data);
+    } catch (e) {
+      alert(e);
+    }
   },
 
   // todo 추가
   async addTodo({ commit }, newTodo) {
-    commit(
-      'addTodo',
-      (await api.addTodo({
-        text: newTodo,
-        done: false
-      })).data
-    );
+    try {
+      commit(
+        'addTodo',
+        (await api.addTodo({
+          text: newTodo,
+          done: false
+        })).data
+      );
+    } catch (e) {
+      alert(e);
+    }
   },
 
   // todo 제거
   async deleteTodo({ commit }, id) {
-    if (!confirm('정말 삭제하시겠습니까??')) return;
-    await api.deleteTodo(id);
-    commit('deleteTodo', id);
+    try {
+      if (!confirm('정말 삭제하시겠습니까??')) return;
+      await api.deleteTodo(id);
+      commit('deleteTodo', id);
+    } catch (e) {
+      alert(e);
+    }
   },
 
   // 완료된 todos 제거
@@ -42,16 +54,24 @@ const actions = {
 
   // todo 업데이트
   async updateTodo({ commit }, todo) {
-    commit('updateTodo', (await api.updateTodo(todo)).data);
+    try {
+      commit('updateTodo', (await api.updateTodo(todo)).data);
+    } catch (e) {
+      alert(e);
+    }
   },
 
   // todo list 업데이트
   async updateTodoList({ commit }, todos) {
-    await Promise.all(todos.map(todo => api.deleteTodo(todo.id)));
-    const values = await Promise.all(
-      todos.map(todo => api.addTodo({ text: todo.text, done: todo.done }))
-    );
-    commit('initTodos', values.map(value => value.data));
+    try {
+      await Promise.all(todos.map(todo => api.deleteTodo(todo.id)));
+      const values = await Promise.all(
+        todos.map(todo => api.addTodo({ text: todo.text, done: todo.done }))
+      );
+      commit('initTodos', values.map(value => value.data));
+    } catch (e) {
+      alert(e);
+    }
   }
 };
 const getters = {
