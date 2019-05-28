@@ -1,5 +1,5 @@
 import axios from 'axios';
-const apiUrl = `api/todos/`;
+const apiUrl = `/api/todos`;
 
 class TodosApi {
   constructor() {}
@@ -17,7 +17,7 @@ class TodosApi {
   }
 
   updateTodo(todo) {
-    return axios.patch(apiUrl + `${todo.id}`, todo);
+    return axios.patch(apiUrl + `/${todo.id}`, todo);
   }
 
   updateTodoList(todos) {

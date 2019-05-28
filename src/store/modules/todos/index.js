@@ -9,6 +9,7 @@ const actions = {
   // todos 초기화
   async loadTodos({ commit }) {
     try {
+      console.log('loadTodos');
       commit('initTodos', (await api.getTodos()).data);
     } catch (e) {
       alert(e);
@@ -44,18 +45,23 @@ const actions = {
   // 완료된 todos 제거
   async deleteDoneTodos() {
     console.log('dddd');
-    //index 나 id 값으로 done값이 true인 것들 체크해서 배열에 담기
-    // .map 돌려서 deleteTodo
-    // console.log(state.totos);
-    // state.totos.map(todo => {
-    //   console.log(todo);
-    // });
   },
 
   // todo 업데이트
-  async updateTodo({ commit }, todo) {
+  async updateTodo({ dispatch }, todo) {
     try {
-      commit('updateTodo', (await api.updateTodo(todo)).data);
+      await api.updateTodo(todo);
+      dispatch('loadTodos');
+      // (await api.updateTodo(todo)).data;
+      // commit('updateTodo', (await api.updateTodo(todo)).data);
+    } catch (e) {
+      alert(e);
+    }
+  },
+
+  async toggleDoneState({ commit }, id) {
+    try {
+      commit('toggleDoneState', (await api.toggleDoneState(todo)).data);
     } catch (e) {
       alert(e);
     }

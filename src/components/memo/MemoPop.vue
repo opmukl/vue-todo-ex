@@ -69,6 +69,15 @@ export default {
       this.$emit('close')
     },
     ...mapActions(['updateMemo', 'updateLayout'])
+  },
+  directives: {
+    focus: {
+      // 디렉티브 정의
+      update: function(el) {
+        el.focus()
+        console.log(el)
+      }
+    }
   }
 }
 </script>

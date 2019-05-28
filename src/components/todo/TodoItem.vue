@@ -8,7 +8,7 @@
         @change="
           updateTodo({
             id: todo.id,
-            done: !todo.done
+            done: todo.done
           })
         "
       />
