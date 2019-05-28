@@ -13,7 +13,11 @@ class TodosApi {
   }
 
   deleteTodo(id) {
-    return axios.delete(apiUrl + `${id}`);
+    return axios.delete(apiUrl + `/${id}`);
+  }
+
+  deleteDoneTodos() {
+    return axios.put(apiUrl);
   }
 
   updateTodo(todo) {
