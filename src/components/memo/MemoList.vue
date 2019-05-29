@@ -29,7 +29,12 @@
           <button
             type="button"
             class="btn btn-static"
-            @click="switchStatic(memo.id)"
+            @click="
+              updateMemo({
+                id: memo.id,
+                static: memo.static
+              })
+            "
           >
             <i class="fa fa-thumbtack" :class="{ static: memo.static }"></i
             >고정하기
@@ -74,7 +79,12 @@
           <button
             type="button"
             class="btn btn-static"
-            @click="switchStatic(memo.id)"
+            @click="
+              updateMemo({
+                id: memo.id,
+                static: memo.static
+              })
+            "
           >
             <i class="fa fa-thumbtack" :class="{ static: memo.static }"></i
             >고정하기
@@ -106,7 +116,7 @@
 import VueGridLayout from 'vue-grid-layout'
 import memoPop from './MemoPop'
 import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapActions } = createNamespacedHelpers('memos')
+const { mapState, mapGetters, mapActions } = createNamespacedHelpers('memos')
 
 export default {
   data() {
@@ -128,10 +138,13 @@ export default {
     GridItem: VueGridLayout.GridItem
   },
   computed: {
-    ...mapState({
+    ...mapGetters({
       layout: 'memos',
       staticMemos: 'staticMemos'
     })
+    // ...mapState({
+
+    // })
   },
   methods: {
     showPalette(e) {
@@ -169,7 +182,7 @@ export default {
         this.isMoving = false
       }, 500)
     },
-    ...mapActions(['switchStatic', 'deleteMemo', 'updateLayout'])
+    ...mapActions(['updateMemo', 'deleteMemo', 'updateLayout'])
   }
 }
 </script>
