@@ -190,6 +190,7 @@ export default {
 <style lang="scss" scoped>
 .memo-list {
   position: relative;
+  background: white;
   &--static {
     display: flex;
     padding: 10px;
@@ -206,7 +207,7 @@ export default {
 }
 .vue-grid-item {
   padding: 15px;
-  background: #fff;
+  background: #ffecdb;
   box-shadow: 10px 10px 15px 0px rgba(0, 0, 0, 0.2);
   &.hide {
     opacity: 0.5;
