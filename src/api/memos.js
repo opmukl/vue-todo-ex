@@ -1,11 +1,11 @@
 import axios from 'axios';
-const apiUrl = `api/memos/`;
+const apiUrl = `api/memo/memos`;
 
 class TodosApi {
   constructor() {}
 
   getMemos() {
-    return axios.get(apiUrl + `?static=false`);
+    return axios.get(apiUrl);
   }
 
   getMemo(id) {

@@ -4,7 +4,7 @@ const router = express.Router();
 
 let todos = [];
 
-router.get('/api/todos', (req, res) => {
+router.get('', (req, res) => {
   if (todos.length <= 0) {
     todos = [
       {
@@ -29,7 +29,7 @@ router.get('/api/todos', (req, res) => {
   res.json(todos);
 });
 
-router.post('/api/todos', function(req, res) {
+router.post('', function(req, res) {
   let todoIds = todos.map(todo => {
     return todo.id;
   });
@@ -43,14 +43,14 @@ router.post('/api/todos', function(req, res) {
   res.end();
 });
 
-router.delete('/api/todos/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
   const selectedIdx = todos.findIndex(t => t.id === parseInt(req.params.id));
   todos.splice(selectedIdx, 1);
   console.log('삭제해요');
   res.end();
 });
 
-router.patch('/api/todos/:id', (req, res) => {
+router.patch('/:id', (req, res) => {
   const todo = todos.filter(t => t.id === parseInt(req.params.id))[0];
   if (!todo) {
     res.status(404);
@@ -75,7 +75,7 @@ router.patch('/api/todos/:id', (req, res) => {
   res.end();
 });
 
-router.put('/api/todos', (req, res) => {
+router.put('', (req, res) => {
   const haveTodoTodos = todos.filter(t => !t.done);
   todos = haveTodoTodos;
   res.end();
