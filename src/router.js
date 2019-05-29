@@ -1,20 +1,20 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
-const Todo = () => import("./components/todo/Todo.vue");
-const Memo = () => import("./components/memo/Memo.vue");
+const Todo = () => import('./components/todo/Todo.vue');
+const Memo = () => import('./components/memo/Memo.vue');
 
 const router = new VueRouter({
-  mode: "history",
+  mode: 'history',
   routes: [
     {
-      path: "/",
-      redirect: "/todo"
+      path: '/',
+      redirect: '/todo'
     },
-    { path: "/todo", component: Todo },
-    { path: "/memo", component: Memo }
+    { path: '/todo', component: Todo },
+    { path: '/memo', component: Memo }
   ]
 });
 
