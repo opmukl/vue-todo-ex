@@ -88,24 +88,6 @@ const mutations = {
   initMemos(state, memos) {
     state.memosAll = memos;
   }
-
-  // initStaticMemos(state, memo) {
-  //   state.staticMemos = memo;
-  // },
-
-  // addMemo(state, newText) {
-  //   state.memos.push(newText);
-  // },
-
-  // deleteMemo(state, id) {
-  //   const selectedIdx = state.memos.findIndex(memo => memo.id === id);
-  //   if (selectedIdx > -1) state.memos.splice(selectedIdx, 1);
-  // },
-
-  // updateMemo(state, memo) {
-  //   const selectedIdx = state.memos.findIndex(m => m.id === memo.id);
-  //   Vue.set(state.memos, selectedIdx, memo);
-  // }
 };
 
 export default {

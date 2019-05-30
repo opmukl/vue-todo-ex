@@ -1,5 +1,4 @@
 const express = require('express');
-// const router = express();
 const router = express.Router();
 
 let memosAll = [];
@@ -45,13 +44,13 @@ router.get('', (req, res) => {
       }
     ];
   }
-  console.log('다시로드해');
+  console.log('load');
   console.log('/////////////////////');
   res.json(memosAll);
 });
 
 router.patch('/:id', (req, res) => {
-  const memo = memosAll.filter(t => t.id === parseInt(req.params.id))[0];
+  const memo = memosAll.find(t => t.id === parseInt(req.params.id));
   if (!memo) {
     res.status(404);
     res.end();
@@ -66,16 +65,16 @@ router.patch('/:id', (req, res) => {
         ...req.body
       };
       x = updateMemo;
-      console.log('inner');
-      console.log(x);
+      // console.log('inner');
+      // console.log(x);
     }
     return x;
   });
-  console.log('업데이트!!!!!');
+  console.log('update');
   res.end();
 });
 
-router.post('', function(req, res) {
+router.post('', (req, res) => {
   let memoIds = memosAll.map(memo => {
     return memo.id;
   });
@@ -84,7 +83,7 @@ router.post('', function(req, res) {
   let newTodo = { ...req.body, id: maxId };
   memosAll.push(newTodo);
 
-  console.log('추가하는거고');
+  console.log('add');
   console.log(newTodo);
   res.end();
 });
@@ -92,7 +91,7 @@ router.post('', function(req, res) {
 router.delete('/:id', (req, res) => {
   const selectedIdx = memosAll.findIndex(t => t.id === parseInt(req.params.id));
   memosAll.splice(selectedIdx, 1);
-  console.log('삭제해요');
+  console.log('delete');
   res.end();
 });
 

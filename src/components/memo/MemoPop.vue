@@ -65,9 +65,6 @@ export default {
         })
       })
     },
-    close() {
-      this.$emit('close')
-    },
     ...mapActions(['updateMemo', 'updateLayout'])
   },
   directives: {

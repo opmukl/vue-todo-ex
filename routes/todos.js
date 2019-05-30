@@ -1,5 +1,4 @@
 const express = require('express');
-// const router = express();
 const router = express.Router();
 
 let todos = [];
@@ -24,12 +23,12 @@ router.get('', (req, res) => {
       }
     ];
   }
-  console.log('다시로드해');
+  console.log('load');
   console.log('/////////////////////');
   res.json(todos);
 });
 
-router.post('', function(req, res) {
+router.post('', (req, res) => {
   let todoIds = todos.map(todo => {
     return todo.id;
   });
@@ -38,7 +37,7 @@ router.post('', function(req, res) {
   let newTodo = { ...req.body, id: maxId };
   todos.push(newTodo);
 
-  console.log('추가하는거고');
+  console.log('add');
   console.log(newTodo);
   res.end();
 });
@@ -46,7 +45,7 @@ router.post('', function(req, res) {
 router.delete('/:id', (req, res) => {
   const selectedIdx = todos.findIndex(t => t.id === parseInt(req.params.id));
   todos.splice(selectedIdx, 1);
-  console.log('삭제해요');
+  console.log('delete');
   res.end();
 });
 
@@ -66,12 +65,12 @@ router.patch('/:id', (req, res) => {
         ...req.body
       };
       x = updateTodo;
-      console.log('inner');
-      console.log(x);
+      // console.log('inner');
+      // console.log(x);
     }
     return x;
   });
-  console.log('업데이트!!!!!');
+  console.log('update');
   res.end();
 });
 

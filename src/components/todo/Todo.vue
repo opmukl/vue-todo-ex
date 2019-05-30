@@ -3,8 +3,6 @@
     <slot name="header">
       <h1>TODOS</h1>
     </slot>
-    <!-- <TodoHeader></TodoHeader> -->
-
     <section class="section-todos">
       <TodoInput></TodoInput>
       <TodoList :todos="todos"></TodoList>
@@ -12,7 +10,6 @@
   </section>
 </template>
 <script>
-// import TodoHeader from './TodoHeader'
 import TodoInput from './TodoInput'
 import TodoList from './TodoList'
 
