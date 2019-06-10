@@ -1,5 +1,5 @@
 import axios from 'axios';
-const apiUrl = `api/memos`;
+const apiUrl = `/api/memos`;
 
 class TodosApi {
   constructor() {}
@@ -7,10 +7,6 @@ class TodosApi {
   getMemos() {
     return axios.get(apiUrl);
   }
-
-  // getMemo(id) {
-  //   return axios.get(apiUrl + `${id}`);
-  // }
 
   addMemo(newText) {
     return axios.post(apiUrl, newText);

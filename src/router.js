@@ -26,7 +26,8 @@ const router = new VueRouter({
   mode: 'history',
   routes: [
     { path: '/', component: Login },
-    { path: '/todo', component: Todo, meta: { authRequired: true } },
+    { path: '/todo', component: Todo },
+    // { path: '/todo', component: Todo, meta: { authRequired: true } },
     { path: '/memo', component: Memo }
   ]
 });

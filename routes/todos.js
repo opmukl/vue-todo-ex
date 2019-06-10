@@ -23,8 +23,8 @@ router.get('', (req, res) => {
       }
     ];
   }
-  console.log('load');
-  console.log('/////////////////////');
+  // console.log('load');
+  // console.log('/////////////////////');
   res.json(todos);
 });
 
@@ -37,15 +37,15 @@ router.post('', (req, res) => {
   let newTodo = { ...req.body, id: maxId };
   todos.push(newTodo);
 
-  console.log('add');
-  console.log(newTodo);
+  // console.log('add');
+  // console.log(newTodo);
   res.end();
 });
 
 router.delete('/:id', (req, res) => {
   const selectedIdx = todos.findIndex(t => t.id === parseInt(req.params.id));
   todos.splice(selectedIdx, 1);
-  console.log('delete');
+  // console.log('delete');
   res.end();
 });
 
@@ -65,12 +65,10 @@ router.patch('/:id', (req, res) => {
         ...req.body
       };
       x = updateTodo;
-      // console.log('inner');
-      // console.log(x);
     }
     return x;
   });
-  console.log('update');
+  // console.log('update');
   res.end();
 });
 

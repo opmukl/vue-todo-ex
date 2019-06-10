@@ -1,31 +1,36 @@
 <template>
   <div>
-    <form @submit.prevent="handleSubmit">
-      <input type="text" v-model="user.username" />
-      <input type="password" v-model="user.password" />
+    <form @submit.prevent="onSubmit">
+      <label for="">ID </label><input type="text" v-model="uid" />
+      <label for="">PW </label><input type="password" v-model="password" />
       <button type="submit">login</button>
     </form>
   </div>
 </template>
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const { mapActions } = createNamespacedHelpers('account')
+
 export default {
   name: 'Login',
   data() {
     return {
-      user: {
-        username: '',
-        password: ''
-      },
-      submitted: false
+      uid: '',
+      password: ''
     }
   },
   created() {},
   methods: {
-    handleSubmit(e) {
-      this.submitted = true
-      const { username, password } = this
-      if (username && password) {
-        this.login({ username, password })
+    ...mapActions(['login']),
+    async onSubmit() {
+      try {
+        let loginResult = await this.login({
+          uid: this.uid,
+          password: this.password
+        })
+        console.log(loginResult) // 로그인 성공하면 true, 아니면 false
+      } catch (err) {
+        console.error(err)
       }
     }
   }
