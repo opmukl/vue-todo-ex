@@ -49,9 +49,10 @@ router.beforeEach((to, from, next) => {
     })
   ) {
     alert('로그인 해주세요!');
+    next({ path: '/login' }); // 페이지 전환
   } else {
     console.log('routing success :' + to.path);
-    next({ path: '/login' }); // 페이지 전환
+    next(); // 페이지 전환
   }
 });
 export default router;
