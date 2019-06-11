@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import { unwatchFile } from 'fs';
 
 Vue.use(VueRouter);
 
@@ -22,13 +21,22 @@ const Memo = () => import('./components/memo/Memo.vue');
 //     // `this`로 Login 컴포넌트를 접근할 수 있음
 //   }
 // };
+
+// const requireAuth = () => (from, to, next) => {
+//   const isAuthenticated = true;
+//   if (isAuthenticated) return next();
+//   next('/login?returnPath=me');
+// };
+
 const router = new VueRouter({
   mode: 'history',
   routes: [
-    { path: '/', component: Login },
-    { path: '/todo', component: Todo },
-    // { path: '/todo', component: Todo, meta: { authRequired: true } },
-    { path: '/memo', component: Memo }
+    { path: '/login', component: Login },
+    // beforeEnter에서 인증정보가 없을 경우 로그인 화면으로 리다이렉트
+    // { path: '/todo', component: Todo, beforeEnter: requireAuth },
+    // { path: '/memo', component: Memo, beforeEnter: requireAuth }
+    { path: '/todo', component: Todo, meta: { authRequired: true } },
+    { path: '/memo', component: Memo, meta: { authRequired: true } }
   ]
 });
 
@@ -43,7 +51,7 @@ router.beforeEach((to, from, next) => {
     alert('로그인 해주세요!');
   } else {
     console.log('routing success :' + to.path);
-    next(); // 페이지 전환
+    next({ path: '/login' }); // 페이지 전환
   }
 });
 export default router;

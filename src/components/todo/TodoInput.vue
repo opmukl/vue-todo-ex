@@ -14,7 +14,7 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapActions } = createNamespacedHelpers('todos')
+const { mapActions } = createNamespacedHelpers('todos')
 
 export default {
   name: 'TodoInput',

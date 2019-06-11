@@ -42,9 +42,9 @@ button {
 }
 
 #app {
-  width: 50%;
+  width: 100%;
   min-width: 500px;
-  max-width: 800px;
+  // max-width: 800px;
   margin: 0 auto;
   font-family: 'Hind Siliguri', 'Noto Sans KR', sans-serif;
 

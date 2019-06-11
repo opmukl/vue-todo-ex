@@ -116,7 +116,7 @@
 import VueGridLayout from 'vue-grid-layout'
 import memoPop from './MemoPop'
 import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapGetters, mapActions } = createNamespacedHelpers('memos')
+const { mapGetters, mapActions } = createNamespacedHelpers('memos')
 
 export default {
   data() {

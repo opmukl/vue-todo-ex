@@ -9,7 +9,7 @@
 </template>
 <script>
 import { createNamespacedHelpers } from 'vuex'
-const { mapActions } = createNamespacedHelpers('account')
+const { mapActions } = createNamespacedHelpers('auth')
 
 export default {
   name: 'Login',
@@ -30,6 +30,7 @@ export default {
         })
         console.log(loginResult) // 로그인 성공하면 true, 아니면 false
       } catch (err) {
+        console.log('여긴 Login.vue에서 에러')
         console.error(err)
       }
     }
