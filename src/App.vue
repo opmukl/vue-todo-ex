@@ -57,6 +57,9 @@ button {
   }
 }
 
+label,
+input,
+button,
 textarea {
   font-family: 'Hind Siliguri', 'Noto Sans KR', sans-serif;
 }

@@ -1,17 +1,39 @@
 <template>
   <nav>
-    <div class="center">
+    <div class="center" v-if="userAuth">
       <router-link to="/todo" class="nav__todos">Todos</router-link>
       <router-link to="/memo" class="nav__memos">Memos</router-link>
     </div>
-    <router-link to="/login" class="nav__login fa fa-sign-in-alt"
-      ><span> login</span></router-link
-    >
+    <router-link
+      to="/login"
+      v-if="!userAuth"
+      class="nav__login fa fa-sign-in-alt"
+      ><span>login</span>
+    </router-link>
+    <router-link to="/" v-if="userAuth" class="nav__login fa fa-sign-out-alt">
+      <span>logout</span>
+    </router-link>
   </nav>
 </template>
 
 <script>
-export default {}
+import { createNamespacedHelpers } from 'vuex'
+const { mapState } = createNamespacedHelpers('auth')
+
+export default {
+  name: 'Login',
+  data() {
+    return {
+      uid: '',
+      password: ''
+    }
+  },
+  computed: {
+    ...mapState(['userAuth'])
+  },
+  created() {},
+  methods: {}
+}
 </script>
 
 <style lang="scss" scoped>

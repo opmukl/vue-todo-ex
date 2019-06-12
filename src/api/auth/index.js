@@ -1,22 +1,6 @@
 import axios from 'axios';
 const apiUrl = `/api/auth`;
-// const getUserInfo = (uid, password) => {
-//   console.log('getUserInfo');
-//   return axios.get(apiUrl, {
-//     params: {
-//       uid: uid,
-//       password: password
-//     }
-//   });
-// };
 
-// const isFinished = uid => {
-//   return axios.get('/endpoint-for-is-finished', {
-//     params: {
-//       uid: uid
-//     }
-//   });
-// };
 class loginApi {
   constructor() {}
 
@@ -38,6 +22,7 @@ class loginApi {
   async login(uid, password) {
     try {
       const getUserInfoPromise = await this.getUserInfo(uid, password);
+      console.log(getUserInfoPromise);
       // const isFinishedPromise = await isFinished(uid);
       // const [userinfoResponse, isFinishedResponse] = await promised.all([
       //   getUserInfoPromise,
@@ -45,9 +30,8 @@ class loginApi {
       // ]);
       // if (userinfoResponse.data.length === 0) return 'noAuth';
       // if (isFinishedResponse.data[0].CNT > 0) return 'done';
-      return getUserInfoPromise;
+      return getUserInfoPromise.data.result;
     } catch (err) {
-      console.log(uid, password);
       console.log(err);
     }
   }

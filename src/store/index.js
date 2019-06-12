@@ -12,7 +12,10 @@ export default new Vuex.Store({
     todos,
     memos
   },
-  state: {},
+  state: {
+    authedUid: 'null',
+    isLogined: false
+  },
   getters: {},
   mutations: {},
   actions: {}
