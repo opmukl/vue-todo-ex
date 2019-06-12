@@ -1,5 +1,8 @@
 <template>
   <nav>
+    <router-link to="/login" class="nav__icon fa fa-home">
+      <span>home</span>
+    </router-link>
     <div class="center" v-if="userAuth">
       <router-link to="/todo" class="nav__todos">Todos</router-link>
       <router-link to="/memo" class="nav__memos">Memos</router-link>
@@ -7,12 +10,12 @@
     <router-link
       to="/login"
       v-if="!userAuth"
-      class="nav__login fa fa-sign-in-alt"
+      class="nav__icon fa fa-sign-in-alt"
       ><span>login</span>
     </router-link>
-    <router-link to="/" v-if="userAuth" class="nav__login fa fa-sign-out-alt">
+    <button to="/" v-if="userAuth" class="nav__icon fa fa-sign-out-alt">
       <span>logout</span>
-    </router-link>
+    </button>
   </nav>
 </template>
 
@@ -38,16 +41,19 @@ export default {
 
 <style lang="scss" scoped>
 nav {
+  display: flex;
   position: sticky;
   top: 0;
   left: 0;
+  height: 50px;
   text-align: center;
   z-index: 10;
   font-size: 0;
   background: #bbb;
+  justify-content: space-between;
 
   .center {
-    max-width: 70%;
+    width: 70%;
     margin: 0 auto;
   }
 
@@ -68,12 +74,10 @@ nav {
     }
   }
 
-  .nav__login {
-    position: absolute;
-    right: 2%;
-    top: 5px;
+  .nav__icon {
     width: 40px;
     height: 40px;
+    margin: 5px 10px 0;
     line-height: 34px;
 
     border-radius: 50%;
