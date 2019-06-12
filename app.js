@@ -8,7 +8,6 @@ const port = 3000;
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
-// app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
@@ -26,7 +25,6 @@ app.use(
 );
 
 app.get('/', function(req, res, next) {
-  // console.log(req.session);
   console.log('Cookies: ', req.cookies);
   res.send('Hello session');
 });

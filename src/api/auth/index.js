@@ -4,25 +4,26 @@ const apiUrl = `/api/auth`;
 class loginApi {
   constructor() {}
 
-  getUserInfo(uid, password) {
-    return axios.post(`${apiUrl}/login`, {
-      uid,
-      password
-    });
-  }
+  // getUserInfo(uid, password) {
+  //   return axios.post(`${apiUrl}/login`, {
+  //     uid,
+  //     password
+  //   });
+  // }
 
   async login(uid, password) {
     try {
-      const getUserInfoPromise = await this.getUserInfo(uid, password);
-      console.log(getUserInfoPromise);
-      return getUserInfoPromise.data.result;
+      return await axios.post(`${apiUrl}/login`, {
+        uid,
+        password
+      });
     } catch (err) {
       console.log(err);
     }
   }
 
-  logout(authenticatedUserId) {
-    return axios.post(`${apiUrl}/logout`, authenticatedUserId);
+  logout() {
+    return axios.get(`${apiUrl}/logout`);
   }
 }
 

@@ -7,6 +7,7 @@ router.get('', (req, res) => {
   if (todos.length <= 0) {
     todos = [
       {
+        uid: 'opmiuo',
         id: 1,
         text: 'api만들어보기이게 찍히고있는데',
         done: false
@@ -23,6 +24,7 @@ router.get('', (req, res) => {
       }
     ];
   }
+  console.log(req.session.uid);
   // console.log('load');
   // console.log('/////////////////////');
   res.json(todos);

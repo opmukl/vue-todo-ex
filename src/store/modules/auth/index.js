@@ -10,13 +10,16 @@ const getters = {};
 
 const actions = {
   async login({ commit }, { uid, password }) {
-    commit('LOGIN', [uid, await api.login(uid, password)]);
+    const response = await api.login(uid, password);
+    alert(response.data.message);
+    commit('LOGIN', [uid, response.data.result]);
   },
 
-  async logout({ commit }, authenticatedUserId) {
+  async logout({ commit }) {
     // console.log(authenticatedUserId);
-    await api.logout(authenticatedUserId);
-    // commit('LOGOUT');
+    const response = await api.logout();
+    alert(response.data.message);
+    commit('LOGOUT');
   }
 };
 
@@ -24,7 +27,6 @@ const mutations = {
   LOGIN(state, [uid, authStatus]) {
     state.authenticatedUserId = uid;
     state.userAuth = authStatus;
-    console.log(state.userAuth);
   },
 
   LOGOUT(state) {

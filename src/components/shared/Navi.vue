@@ -15,7 +15,7 @@
     </router-link>
     <button
       type="button"
-      @click="logout(this.authenticatedUserId)"
+      @click="logout()"
       v-if="userAuth"
       class="nav__icon fa fa-sign-out-alt"
     >
@@ -34,7 +34,7 @@ export default {
     return {}
   },
   computed: {
-    ...mapState(['authenticatedUserId', 'userAuth'])
+    ...mapState(['userAuth'])
   },
   created() {},
   methods: {
