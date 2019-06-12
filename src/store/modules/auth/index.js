@@ -1,7 +1,8 @@
 import api from '@/api/auth';
+import authStore from '@/store/modules/auth';
 
 const state = {
-  authedUserId: '',
+  authenticatedUserId: '',
   userAuth: false
 };
 
@@ -9,24 +10,25 @@ const getters = {};
 
 const actions = {
   async login({ commit }, { uid, password }) {
-    let loginResponse = await api.login(uid, password);
-    commit('LOGIN', [uid, loginResponse]);
+    commit('LOGIN', [uid, await api.login(uid, password)]);
   },
 
-  logout({ commit }) {
-    commit('LOGOUT');
+  async logout({ commit }, authenticatedUserId) {
+    // console.log(authenticatedUserId);
+    await api.logout(authenticatedUserId);
+    // commit('LOGOUT');
   }
 };
 
 const mutations = {
   LOGIN(state, [uid, authStatus]) {
-    state.authedUserId = uid;
+    state.authenticatedUserId = uid;
     state.userAuth = authStatus;
     console.log(state.userAuth);
   },
 
   LOGOUT(state) {
-    state.authedUserId = '';
+    state.authenticatedUserId = '';
     state.userAuth = false;
   }
 };

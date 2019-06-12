@@ -40,7 +40,7 @@ router.beforeEach((to, from, next) => {
       next({ path: '/login' });
     }
   } else {
-    console.log('routing success :' + to.path);
+    // console.log('routing success :' + to.path);
     next();
   }
 });

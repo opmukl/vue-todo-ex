@@ -15,7 +15,7 @@
     </router-link>
     <button
       type="button"
-      @click="logout"
+      @click="logout(this.authenticatedUserId)"
       v-if="userAuth"
       class="nav__icon fa fa-sign-out-alt"
     >
@@ -29,15 +29,12 @@ import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapActions } = createNamespacedHelpers('auth')
 
 export default {
-  name: 'Login',
+  name: 'Gnb',
   data() {
-    return {
-      uid: '',
-      password: ''
-    }
+    return {}
   },
   computed: {
-    ...mapState(['userAuth'])
+    ...mapState(['authenticatedUserId', 'userAuth'])
   },
   created() {},
   methods: {

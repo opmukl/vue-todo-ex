@@ -39,4 +39,15 @@ router.post('/login', (req, res) => {
     .json({ result: true, message: '정상적으로 로그인되었습니다.' });
 });
 
+router.post('/logout', (req, res) => {
+  // let body = req.body;
+  // let user = users.find(state.authenticatedUserId);
+  console.log('ddddddd');
+  console.log(req.body);
+
+  // router.
+  // req.session.destory();  // 세션 삭제
+  // res.clearCookie(‘sid’); // 세션 쿠키 삭제
+});
+
 module.exports = router;

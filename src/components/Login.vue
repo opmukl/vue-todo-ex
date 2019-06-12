@@ -1,6 +1,6 @@
 <template>
   <section>
-    <p v-if="userAuth">{{ authedUserId }}님 안녕하세요</p>
+    <p v-if="userAuth">{{ authenticatedUserId }}님 안녕하세요</p>
 
     <form @submit.prevent="onSubmit" v-if="!userAuth">
       <label for="uid">ID</label>
@@ -31,7 +31,7 @@ export default {
   },
   created() {},
   computed: {
-    ...mapState(['authedUserId', 'userAuth'])
+    ...mapState(['authenticatedUserId', 'userAuth'])
   },
   methods: {
     ...mapActions(['login']),
