@@ -5,7 +5,6 @@ let users = [
   {
     uid: 'opmiuo',
     password: '1234' //비밀번호 암호화.....해서 저장해야한다 나중엔
-    // islogined: false
   }
 ];
 router.get('/login', (req, res) => {
@@ -27,7 +26,7 @@ router.post('/login', (req, res) => {
 
   //정상적으로 로그인 되었을 때의 처리
   console.log('정상적 로그인처리');
-  req.session.is_logined = true;
+  // req.session.is_logined = true; //이거 아직 의미가 없음
 
   req.session.uid = user.uid;
   // res.render('logout', { id: req.session.user_id });

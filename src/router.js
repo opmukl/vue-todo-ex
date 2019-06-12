@@ -8,20 +8,10 @@ const Login = () => import('./components/Login.vue');
 const Todo = () => import('./components/todo/Todo.vue');
 const Memo = () => import('./components/memo/Memo.vue');
 
-// const requireAuth = () => (from, to, next) => {
-//   // const isAuthenticated = false;
-//   // if (isAuthenticated) return next();
-//   alert('로그인이 필요합니다.');
-//   next({ path: '/login' }); // 페이지 전환
-// };
-
 const router = new VueRouter({
   mode: 'history',
   routes: [
     { path: '/login', component: Login },
-    // beforeEnter에서 인증정보가 없을 경우 로그인 화면으로 리다이렉트
-    // { path: '/todo', component: Todo, beforeEnter: requireAuth },
-    // { path: '/memo', component: Memo, beforeEnter: requireAuth }
     {
       path: '/todo',
       component: Todo,
@@ -47,11 +37,11 @@ router.beforeEach((to, from, next) => {
       next();
     } else {
       alert('로그인이 필요합니다.');
-      next({ path: '/login' }); // 페이지 전환
+      next({ path: '/login' });
     }
   } else {
     console.log('routing success :' + to.path);
-    next(); // 페이지 전환
+    next();
   }
 });
 

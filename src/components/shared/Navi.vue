@@ -13,7 +13,12 @@
       class="nav__icon fa fa-sign-in-alt"
       ><span>login</span>
     </router-link>
-    <button to="/" v-if="userAuth" class="nav__icon fa fa-sign-out-alt">
+    <button
+      type="button"
+      @click="logout"
+      v-if="userAuth"
+      class="nav__icon fa fa-sign-out-alt"
+    >
       <span>logout</span>
     </button>
   </nav>
@@ -21,7 +26,7 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-const { mapState } = createNamespacedHelpers('auth')
+const { mapState, mapActions } = createNamespacedHelpers('auth')
 
 export default {
   name: 'Login',
@@ -35,7 +40,9 @@ export default {
     ...mapState(['userAuth'])
   },
   created() {},
-  methods: {}
+  methods: {
+    ...mapActions(['logout'])
+  }
 }
 </script>
 
