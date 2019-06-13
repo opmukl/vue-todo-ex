@@ -80,20 +80,6 @@ const mutations = {
   initTodos(state, todos) {
     state.todos = todos;
   }
-
-  // addTodo(state, newTodo) {
-  //   state.todos.push(newTodo);
-  // },
-
-  // deleteTodo(state, id) {
-  //   const selectedIdx = state.todos.findIndex(todo => todo.id === id);
-  //   if (selectedIdx > -1) state.todos.splice(selectedIdx, 1);
-  // },
-
-  // updateTodo(state, todo) {
-  //   const selectedIdx = state.todos.findIndex(t => t.id === todo.id);
-  //   Vue.set(state.todos, selectedIdx, todo);
-  // }
 };
 
 export default {

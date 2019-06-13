@@ -1,5 +1,5 @@
 import api from '@/api/auth';
-import authStore from '@/store/modules/auth';
+import router from '@/router';
 
 const state = {
   authenticatedUserId: '',
@@ -16,10 +16,10 @@ const actions = {
   },
 
   async logout({ commit }) {
-    // console.log(authenticatedUserId);
     const response = await api.logout();
     alert(response.data.message);
     commit('LOGOUT');
+    router.push({ path: 'login' });
   }
 };
 

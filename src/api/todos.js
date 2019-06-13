@@ -13,7 +13,7 @@ class TodosApi {
   }
 
   deleteTodo(id) {
-    return axios.delete(apiUrl + `/${id}`);
+    return axios.delete(`${apiUrl}/${id}`);
   }
 
   deleteDoneTodos() {
@@ -21,7 +21,7 @@ class TodosApi {
   }
 
   updateTodo(todo) {
-    return axios.patch(apiUrl + `/${todo.id}`, todo);
+    return axios.patch(`${apiUrl}/${todo.id}`, todo);
   }
 
   updateTodoList(todos) {

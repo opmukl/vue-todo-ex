@@ -13,11 +13,11 @@ class TodosApi {
   }
 
   deleteMemo(id) {
-    return axios.delete(apiUrl + `/${id}`);
+    return axios.delete(`${apiUrl}/${id}`);
   }
 
   updateMemo(memo) {
-    return axios.patch(apiUrl + `/${memo.id}`, memo);
+    return axios.patch(`${apiUrl}/${memo.id}`, memo);
   }
 }
 

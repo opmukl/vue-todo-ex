@@ -5,11 +5,12 @@ let users = [
   {
     uid: 'opmiuo',
     password: '1234' //비밀번호 암호화.....해서 저장해야한다 나중엔
+  },
+  {
+    uid: 'user2222',
+    password: '2222'
   }
 ];
-router.get('/login', (req, res) => {
-  console.log('dddd');
-});
 
 router.post('/login', (req, res) => {
   let body = req.body;
@@ -30,11 +31,6 @@ router.post('/login', (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
-  // let body = req.body;
-  // let user = users.find(state.authenticatedUserId);
-  console.log('ddddddd');
-  console.log(req.body);
-
   req.session.destroy(err => {
     if (err) {
       console.log(err);
@@ -45,8 +41,6 @@ router.get('/logout', (req, res) => {
       });
     }
   });
-
-  return;
 });
 
 module.exports = router;
